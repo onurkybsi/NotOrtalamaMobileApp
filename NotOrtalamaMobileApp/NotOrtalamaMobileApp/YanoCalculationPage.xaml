@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="NotOrtalamaMobileApp.YanoCalculationPage"
+             Title="YANO Hesaplama Sayfası">
+    
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="WhiteSmoke" Spacing="30" Padding="20">
+
+            <Label Text="Hesaplanacak Dönem"/>
+
+            <Picker x:Name="semesters"/>
+
+            <Label Text="Ders Ekle"/>
+
+            <RelativeLayout VerticalOptions="Fill">
+
+                <Picker RelativeLayout.WidthConstraint="{ConstraintExpression 
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=0.5}"/>
+
+                <Button Text="Sil" x:Name="deleteLesson"
+                    RelativeLayout.XConstraint="{ConstraintExpression 
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=0.5}" 
+                    RelativeLayout.WidthConstraint="{ConstraintExpression 
+                    Type=RelativeToParent,
+                    Property=Width,
+                    Factor=0.5}"/>
+            </RelativeLayout>
+
+            <Button Text="Ders Ekle"/>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                <Label Text="YANO :" FontSize="Large"/>
+                <Label Text="3.30" FontSize="Large" FontAttributes="Bold"/>
+
+            </StackLayout>
+
+            <Button x:Name="calculateYano" Text="Hesapla" Margin="0,0,0,50"/>
+
+            <Button x:Name="insertRepo" Text="Kayıtlı Dönemlere Ekle" HorizontalOptions="End"/>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
