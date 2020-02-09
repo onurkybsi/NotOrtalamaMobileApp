@@ -68,7 +68,6 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\FormsViewGroup.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\FormsViewGroup.pdb
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\Java.Interop.dll
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\machine.config
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\Mono.Android.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\Mono.Android.pdb
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\Mono.Security.dll
@@ -171,6 +170,7 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\typemap.mj.x86_64.s
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\__environment__.txt
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\MonoRuntimeProvider.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\assets\machine.config
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\bin\mono.android.jar
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\static.flag
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\buildid.txt
@@ -219,22 +219,22 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v4\content\Loader_OnLoadCompleteListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v4\app\FragmentManager_OnBackStackChangedListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v4\app\SharedElementCallback_OnSharedElementsReadyListenerImplementor.java
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v13\view\inputmethod\InputConnectionCompat_OnCommitContentListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\widget\Toolbar_NavigationOnClickEventDispatcher.java
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v13\view\DragStartHelper_OnDragStartListenerImplementor.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v13\view\inputmethod\InputConnectionCompat_OnCommitContentListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\recyclerview\R.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\v13\view\DragStartHelper_OnDragStartListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\cardview\R.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\transition\Transition_TransitionListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\appcompat\R.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnCancelListenerImplementor.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnClickListenerImplementor.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnMultiChoiceClickListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\widget\AppBarLayout_OnOffsetChangedListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\widget\BottomNavigationView_OnNavigationItemReselectedListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\widget\BottomNavigationView_OnNavigationItemSelectedListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\widget\NavigationView_OnNavigationItemSelectedListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\widget\SwipeDismissBehavior_OnDismissListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\widget\TabLayout_BaseOnTabSelectedListenerImplementor.java
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnCancelListenerImplementor.java
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnClickListenerImplementor.java
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\v7\app\AlertDialog_IDialogInterfaceOnMultiChoiceClickListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\mono\android\support\design\chip\ChipGroup_OnCheckedChangeListenerImplementor.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\transition\R.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\mediacompat\R.java
@@ -420,7 +420,6 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64ee486da937c010f4\ImageRenderer.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64ee486da937c010f4\LabelRenderer.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\android\support\compat\R.java
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc642acf0b0faa9bf2cc\MainActivity.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64720bb2db43a66fe9\ButtonRenderer.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64720bb2db43a66fe9\CarouselPageRenderer.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64720bb2db43a66fe9\FormsFragmentPagerAdapter_1.java
@@ -442,6 +441,7 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64720bb2db43a66fe9\ViewRenderer_2.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64a98abb514ffad9f1\CustomTabsServiceConnectionImpl.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc64a98abb514ffad9f1\KeepAliveService.java
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\crc642acf0b0faa9bf2cc\MainActivity.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\bin\packaged_resources
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\src\com\companyname\notortalamamobileapp\R.java
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\typemap.jm.arm64-v8a.o
@@ -461,7 +461,6 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\app_shared_libraries\x86\libxamarin-app.so
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\app_shared_libraries\x86_64\libxamarin-app.so
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\android\bin\classes.dex
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\SetupDependenciesForDesigner.stamp
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\_BuildAdditionalResourcesCache.stamp
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\_CleanIntermediateIfNuGetsChange.stamp
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\_CompileToDalvik.stamp

@@ -16,5 +16,10 @@ namespace NotOrtalamaMobileApp
         {
             InitializeComponent();
         }
+
+        private async void addCourseToSemester_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddLesson());
+        }
     }
 }

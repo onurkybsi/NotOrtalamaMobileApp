@@ -3,13 +3,15 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\bin\Debug\netstandard2.0\ref\NotOrtalamaMobileApp.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\bin\Debug\netstandard2.0\NotOrtalamaMobileApp.pdb
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.csprojAssemblyReference.cache
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\AddLesson.xaml.g.cs
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\AgnoCalculationPage.xaml.g.cs
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\SemesterRepo.xaml.g.cs
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\YanoCalculationPage.xaml.g.cs
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.AssemblyInfoInputs.cache
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.AssemblyInfo.cs
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\ref\NotOrtalamaMobileApp.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.pdb
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\YanoCalculationPage.xaml.g.cs
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\SemesterRepo.xaml.g.cs

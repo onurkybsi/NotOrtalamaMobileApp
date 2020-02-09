@@ -14,7 +14,6 @@ namespace NotOrtalamaMobileApp
     {
         public SemesterRepo()
         {
-            
             InitializeComponent();
         }
     }

@@ -27,5 +27,10 @@ namespace NotOrtalamaMobileApp
         {
             await Navigation.PushAsync(new SemesterRepo());
         }
+
+        private async void toAgno_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AgnoCalculationPage());
+        }
     }
 }

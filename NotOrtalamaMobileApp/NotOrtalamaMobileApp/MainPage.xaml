@@ -17,7 +17,7 @@
            Padding="0,100,0,0"/>
 
             <Button x:Name="toYano" Text="YANO" Clicked="toYano_Clicked"/>
-            <Button x:Name="toAgno" Text="AGNO"/>
+            <Button x:Name="toAgno" Text="AGNO" Clicked="toAgno_Clicked"/>
 
             <StackLayout Orientation="Horizontal" Padding="50,20,0,0">
 

@@ -34,7 +34,7 @@
                     Factor=0.5}"/>
             </RelativeLayout>
 
-            <Button Text="Ders Ekle"/>
+            <Button x:Name="addCourseToSemester" Text="Ders Ekle" Clicked="addCourseToSemester_Clicked"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
