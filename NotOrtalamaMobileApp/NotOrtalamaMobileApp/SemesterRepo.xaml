@@ -7,19 +7,26 @@
              x:Class="NotOrtalamaMobileApp.SemesterRepo"
              Title="Kayıtlı Dönemler Sayfası">
     <ContentPage.Content>
-        <ListView x:Name="listView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout x:Name="item" BackgroundColor="#eee" Orientation="Vertical">
 
-                            <Label x:Name="donemAdi"/>
-                            <Label x:Name="yano"/>
+        <StackLayout>
 
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <Label Text="Kayıtlı Donemler" HorizontalOptions="Center" FontSize="Large"/>
+
+            <ListView x:Name="listView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout x:Name="item" Orientation="Vertical">
+
+                                <Label x:Name="donemAdi"/>
+                                <Label Text=" - "/>
+                                <Label x:Name="yano"/>
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

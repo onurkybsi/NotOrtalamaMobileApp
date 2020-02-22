@@ -18,12 +18,12 @@
 
             <RelativeLayout VerticalOptions="Fill">
 
-                <Picker RelativeLayout.WidthConstraint="{ConstraintExpression 
+                <Picker x:Name="silinecekDersPicker" ItemDisplayBinding="{Binding Path=DersAdi}" RelativeLayout.WidthConstraint="{ConstraintExpression 
                     Type=RelativeToParent,
                     Property=Width,
                     Factor=0.5}"/>
 
-                <Button Text="Sil" x:Name="deleteLesson"
+                <Button Text="Sil" x:Name="deleteLesson" Clicked="deleteLesson_Clicked"
                     RelativeLayout.XConstraint="{ConstraintExpression 
                     Type=RelativeToParent,
                     Property=Width,
