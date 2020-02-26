@@ -3,7 +3,7 @@ using SQLite;
 
 namespace NotOrtalamaMobileApp.Tables
 {
-    [SQLite.Table("DersTable")]
+    [Table("DersTable")]
     public class Ders : IEntity
     {
         [PrimaryKey, AutoIncrement, Column("_id")]

@@ -1,11 +1,6 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer;
-using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -36,7 +31,7 @@ namespace NotOrtalamaMobileApp
             {
                 int toBeDeleted = (lessonToBeDeleted.SelectedItem as Ders).Id;
 
-                await App.dbManagement.DeleteEntity<Ders>(toBeDeleted);
+                await App.dbManagement.DeleteEntity<Ders>(toBeDeleted, "DersTable");
 
                 lessonToBeDeleted.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
             }

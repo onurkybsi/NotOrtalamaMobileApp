@@ -23,7 +23,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
         async public Task DeleteAllEntities<T>() where T : IEntity, new() => await database.DeleteAllAsync<T>();
 
-        async public Task DeleteEntity<T>(int Id) where T : IEntity, new() => await database.ExecuteAsync("DELETE FROM DersTable WHERE _id = ?", Id);
+        async public Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new() => await database.ExecuteScalarAsync<int>("DELETE FROM " + tableName + " WHERE _id = ?", Id);
 
         async public Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new() => await database.Table<T>().ToListAsync();
 
