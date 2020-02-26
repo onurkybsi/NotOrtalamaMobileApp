@@ -15,20 +15,14 @@ namespace NotOrtalamaMobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class YanoCalculationPage : ContentPage
     {
-        private DersManagement dersManagement;
-
         public YanoCalculationPage()
         {
             InitializeComponent();
-
-            dersManagement = new DersManagement();
         }
 
         protected async override void OnAppearing()
         {
-            await dersManagement.CreateTable();
-
-            silinecekDersPicker.ItemsSource = await dersManagement.GetAllEntities() as List<Ders>;
+            lessonToBeDeleted.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
         }
 
         private async void addCourseToSemester_Clicked(object sender, EventArgs e)
@@ -38,11 +32,13 @@ namespace NotOrtalamaMobileApp
 
         private async void deleteLesson_Clicked(object sender, EventArgs e)
         {
-            if(await DisplayAlert("Ders Sil", "Emin misiniz ?", "Evet", "Iptal"))
+            if(!Object.Equals(lessonToBeDeleted.SelectedItem, null) && await DisplayAlert("Ders Sil","Emin misiniz ?","Evet","Hayır"))
             {
-                var silinecekDers = silinecekDersPicker.SelectedItem as Ders;
+                int toBeDeleted = (lessonToBeDeleted.SelectedItem as Ders).Id;
 
-                await dersManagement.DeleteEntity(silinecekDers.Id);
+                await App.dbManagement.DeleteEntity<Ders>(toBeDeleted);
+
+                lessonToBeDeleted.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
             }
             else { }
         }

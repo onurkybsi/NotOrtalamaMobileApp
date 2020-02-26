@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NotOrtalamaMobileApp.DataAccessLayer;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -6,9 +7,13 @@ namespace NotOrtalamaMobileApp
 {
     public partial class App : Application
     {
+        public static DbManagement dbManagement;
+
         public App()
         {
             InitializeComponent();
+
+            dbManagement = new DbManagement();
 
             MainPage = new NavigationPage(new MainPage())
             {

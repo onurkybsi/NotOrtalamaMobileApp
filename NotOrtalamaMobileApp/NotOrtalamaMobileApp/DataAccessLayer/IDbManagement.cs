@@ -1,19 +1,18 @@
 ﻿using NotOrtalamaMobileApp.Tables;
-using System;
+using SQLite;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer
 {
     public interface IDbManagement
     {
-        Task<IEnumerable<IEntity>> GetAllEntities();
-        Task CreateTable();
-        Task<IEntity> GetEntity(int Id);
-        Task InsertEntity(IEntity entity);
-        Task UpdateEntity(IEntity entity);
-        Task DeleteEntity(int Id);
-        Task DeleteAllEntities();
+        Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
+        Task<CreateTableResult> CreateTable<T>() where T : IEntity, new();
+        Task<IEntity> GetEntity<T>(int Id) where T : IEntity, new();
+        Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
+        Task DeleteEntity<T>(int Id) where T : IEntity, new();
+        Task DeleteAllEntities<T>() where T : IEntity, new();
+        Task DbSil<T>() where T : IEntity, new();
     }
 }

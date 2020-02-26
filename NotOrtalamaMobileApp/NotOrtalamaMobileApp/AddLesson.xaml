@@ -11,21 +11,21 @@
 
             <Label Text="Eklenecek Ders"/>
 
-            <Picker x:Name="courseToBeAdded"/>
+            <Picker x:Name="courseToBeAdded" ItemDisplayBinding="{Binding Path=DersAdi}"/>
 
             <Label Text="Ders Adı"/>
 
-            <Picker x:Name="courseName"/>
+            <Entry x:Name="courseName"/>
 
             <Label Text="Ders Kredisi"/>
 
-            <Picker x:Name="courseCredit"/>
+            <Entry x:Name="courseCredit"/>
 
             <Label Text="Harf Notu"/>
 
             <Picker x:Name="letterGrade"/>
 
-            <Button x:Name="addCourse" Text="Ders Ekle"/>
+            <Button x:Name="addCourse" Text="Ders Ekle" Clicked="addCourse_Clicked"/>
 
         </StackLayout>
     </ContentPage.Content>

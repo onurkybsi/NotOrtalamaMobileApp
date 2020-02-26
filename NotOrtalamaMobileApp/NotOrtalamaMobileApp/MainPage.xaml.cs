@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NotOrtalamaMobileApp.DataAccessLayer;
+using NotOrtalamaMobileApp.Tables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,9 +15,15 @@ namespace NotOrtalamaMobileApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected async override void OnAppearing()
+        {
+            await App.dbManagement.CreateTable<Ders>();
         }
 
         private async void toYano_Clicked(object sender, EventArgs e)

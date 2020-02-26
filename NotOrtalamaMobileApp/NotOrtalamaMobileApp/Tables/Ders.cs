@@ -1,18 +1,20 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer;
+﻿
 using SQLite;
 
 namespace NotOrtalamaMobileApp.Tables
 {
-    [Table("DersTable")]
+    [SQLite.Table("DersTable")]
     public class Ders : IEntity
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; }
+        [PrimaryKey, AutoIncrement, Column("_id")]
+        public int Id { get; set; }
+        
         [Unique]
         public string DersAdi { get; set; }
         public int Kredi { get; set; }
         public string HarfNotu { get; set; }
         public int DonemId { get; set; }
+        
         [Ignore]
         public double DersEtki
         {
