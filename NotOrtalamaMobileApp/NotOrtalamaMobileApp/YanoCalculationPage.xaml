@@ -12,7 +12,7 @@
 
             <Label Text="Hesaplanacak Dönem"/>
 
-            <Picker x:Name="semesters"/>
+            <Picker x:Name="semesters" SelectedIndexChanged="semesters_SelectedIndexChanged"/>
 
             <Label Text="Ders Ekle"/>
 
@@ -45,7 +45,7 @@
 
             <Button x:Name="calculateYano" Text="Hesapla" Margin="0,0,0,50"/>
 
-            <Button x:Name="insertRepo" Text="Kayıtlı Dönemlere Ekle" HorizontalOptions="End"/>
+            <Button x:Name="insertDonemToRepo" Text="Kayıtlı Dönemlere Ekle" HorizontalOptions="End" Clicked="insertDonemToRepo_Clicked" IsEnabled="False"/>
 
 
         </StackLayout>

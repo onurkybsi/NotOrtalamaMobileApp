@@ -30,5 +30,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         async public Task<IEntity> GetEntity<T>(int Id) where T : IEntity, new() => await database.GetAsync<T>(Id);
 
         async public Task InsertEntity<T>(IEntity entity) where T : IEntity, new() => await database.InsertAsync(entity);
+
+        async public Task DeleteTransientSemesters() => await database.ExecuteScalarAsync<int>("DELETE FROM DonemTable WHERE _id = 0");
     }
 }

@@ -15,5 +15,9 @@ namespace NotOrtalamaMobileApp
             InitializeComponent();
         }
 
+        protected async override void OnAppearing()
+        {
+            listView.ItemsSource = await App.dbManagement.GetAllEntities<Donem>() as List<Donem>;
+        }
     }
 }

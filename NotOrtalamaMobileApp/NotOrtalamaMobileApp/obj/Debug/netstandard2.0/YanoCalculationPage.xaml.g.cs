@@ -32,7 +32,7 @@ namespace NotOrtalamaMobileApp {
         private global::Xamarin.Forms.Button calculateYano;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.Button insertRepo;
+        private global::Xamarin.Forms.Button insertDonemToRepo;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
@@ -42,7 +42,7 @@ namespace NotOrtalamaMobileApp {
             deleteLesson = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "deleteLesson");
             addCourseToSemester = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "addCourseToSemester");
             calculateYano = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "calculateYano");
-            insertRepo = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "insertRepo");
+            insertDonemToRepo = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "insertDonemToRepo");
         }
     }
 }

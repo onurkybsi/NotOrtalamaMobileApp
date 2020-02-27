@@ -13,6 +13,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
         Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new();
         Task DeleteAllEntities<T>() where T : IEntity, new();
+        Task DeleteTransientSemesters();
         Task DbSil<T>() where T : IEntity, new();
     }
 }

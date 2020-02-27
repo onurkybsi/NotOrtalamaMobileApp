@@ -10,8 +10,9 @@ namespace NotOrtalamaMobileApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddLesson : ContentPage
     {
+        private int _donemId;
 
-        public AddLesson()
+        public AddLesson(int donemId)
         {
             InitializeComponent();
 
@@ -19,6 +20,8 @@ namespace NotOrtalamaMobileApp
             {
                 "AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF", "F0"
             };
+
+            _donemId = donemId;
         }
 
         protected async override void OnAppearing()
@@ -26,6 +29,7 @@ namespace NotOrtalamaMobileApp
             courseToBeAdded.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
         }
 
+        // Add course
         private async void addCourse_Clicked(object sender, EventArgs e)
         {
             if (Object.Equals(courseToBeAdded.SelectedItem, null))
@@ -35,7 +39,7 @@ namespace NotOrtalamaMobileApp
                     DersAdi = courseName.Text,
                     Kredi = Convert.ToInt32(courseCredit.Text),
                     HarfNotu = letterGrade.SelectedItem.ToString(),
-                    DonemId = 0
+                    DonemId = _donemId
                 });
 
                 await DisplayAlert("Ders Ekle", "Eklendi !", "OK");

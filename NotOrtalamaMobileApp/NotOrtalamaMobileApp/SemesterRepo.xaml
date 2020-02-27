@@ -9,17 +9,13 @@
     <ContentPage.Content>
 
         <StackLayout>
-
-            <Label Text="Kayıtlı Donemler" HorizontalOptions="Center" FontSize="Large"/>
-
-            <ListView x:Name="listView">
+            <ListView x:Name="listView" SeparatorColor="Black">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout x:Name="item" Orientation="Vertical">
 
-                                <Label x:Name="donemAdi"/>
-                                <Label Text=" - "/>
+                                <Label x:Name="donemAdi" Text="{Binding Path=DonemAdi}" FontSize="Medium" VerticalOptions="Center" Margin="10,0,0,0"/>
                                 <Label x:Name="yano"/>
 
                             </StackLayout>
