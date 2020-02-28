@@ -20,9 +20,12 @@ namespace NotOrtalamaMobileApp
             };
         }
 
+        // OnAppering
         protected async override void OnAppearing()
         {
-            lessonToBeDeleted.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
+            insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
+
+            lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable");
         }
 
         // Delete course.
@@ -71,15 +74,19 @@ namespace NotOrtalamaMobileApp
                 {
                     Id = Convert.ToInt32(semesters.SelectedItem)
                 });
+
+                await DisplayAlert("Dönem Kayıt", "Kayıt edildi !", "OK");
             }
         }
 
         // Enable or disable "insertDonemToRepo" button.
-        private void semesters_SelectedIndexChanged(object sender, EventArgs e)
+        private async void semesters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((sender as Picker).SelectedIndex == 0 || (sender as Picker).SelectedIndex == -1) insertDonemToRepo.IsEnabled = false;
-            else
-                insertDonemToRepo.IsEnabled = true;
+            insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
+
+            var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>((sender as Picker).SelectedIndex, "DersTable");
+
+            lessonToBeDeleted.ItemsSource = itemsSource.Count > 0 ? itemsSource : null;
         }
     }
 }

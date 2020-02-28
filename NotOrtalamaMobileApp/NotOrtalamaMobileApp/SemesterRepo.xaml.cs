@@ -19,5 +19,18 @@ namespace NotOrtalamaMobileApp
         {
             listView.ItemsSource = await App.dbManagement.GetAllEntities<Donem>() as List<Donem>;
         }
+
+        // Delete semester
+        private async void deleteSemester(object sender, System.EventArgs e)
+        {
+            var semester = ((MenuItem)sender).CommandParameter;
+
+            await App.dbManagement.DeleteEntity<Donem>((semester as Donem).Id, "DonemTable");
+
+            listView.ItemsSource = await App.dbManagement.GetAllEntities<Donem>() as List<Donem>;
+
+            await DisplayAlert("Dönem Sil", "Silindi !", "OK");
+        }
+
     }
 }

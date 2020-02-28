@@ -9,20 +9,31 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <ListView x:Name="listView" SeparatorColor="Black">
+            <ListView x:Name="listView" SeparatorColor="Black" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            
+                            <ViewCell.ContextActions>
+
+                                <MenuItem Clicked="deleteSemester" Text="Sil" CommandParameter="{Binding .}"/>
+
+                            </ViewCell.ContextActions>
+
                             <StackLayout x:Name="item" Orientation="Vertical">
 
                                 <Label x:Name="donemAdi" Text="{Binding Path=DonemAdi}" FontSize="Medium" VerticalOptions="Center" Margin="10,0,0,0"/>
                                 <Label x:Name="yano"/>
 
                             </StackLayout>
-                        </ViewCell>
+                            
+                            </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+
+
+    

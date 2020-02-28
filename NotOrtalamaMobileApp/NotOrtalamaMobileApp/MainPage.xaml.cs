@@ -19,11 +19,7 @@ namespace NotOrtalamaMobileApp
         public MainPage()
         {
             InitializeComponent();
-        }
-
-        protected async override void OnAppearing()
-        {
-            await App.dbManagement.CreateTable<Ders>();
+            
         }
 
         private async void toYano_Clicked(object sender, EventArgs e)

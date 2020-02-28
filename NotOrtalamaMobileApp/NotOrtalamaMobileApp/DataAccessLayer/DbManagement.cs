@@ -28,6 +28,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         async public Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new() => await database.Table<T>().ToListAsync();
 
         async public Task<IEntity> GetEntity<T>(int Id) where T : IEntity, new() => await database.GetAsync<T>(Id);
+        
+        async public Task<List<T>> GetSpecifiedEntities<T>(int donemId, string tableName) where T : IEntity, new() => await database.QueryAsync<T>("SELECT * FROM " + tableName + " WHERE DonemId = ?", donemId);
 
         async public Task InsertEntity<T>(IEntity entity) where T : IEntity, new() => await database.InsertAsync(entity);
 

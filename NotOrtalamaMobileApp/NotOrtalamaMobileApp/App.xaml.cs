@@ -1,7 +1,6 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer;
-using System;
+using NotOrtalamaMobileApp.Tables;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace NotOrtalamaMobileApp
 {
@@ -22,8 +21,10 @@ namespace NotOrtalamaMobileApp
             };
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
+            await App.dbManagement.CreateTable<Ders>();
+            await App.dbManagement.CreateTable<Donem>();
         }
 
         protected override void OnSleep()

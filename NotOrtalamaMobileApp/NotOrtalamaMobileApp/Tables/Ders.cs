@@ -14,7 +14,7 @@ namespace NotOrtalamaMobileApp.Tables
         public int Kredi { get; set; }
         public string HarfNotu { get; set; }
         public int DonemId { get; set; }
-        
+
         [Ignore]
         public double DersEtki
         {
