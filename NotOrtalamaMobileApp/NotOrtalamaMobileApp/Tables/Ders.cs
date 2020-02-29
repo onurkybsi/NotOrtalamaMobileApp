@@ -8,8 +8,6 @@ namespace NotOrtalamaMobileApp.Tables
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
-        
-        [Unique]
         public string DersAdi { get; set; }
         public int Kredi { get; set; }
         public string HarfNotu { get; set; }
@@ -44,6 +42,15 @@ namespace NotOrtalamaMobileApp.Tables
                     default:
                         return 0.0;
                 }
+            }
+        }
+
+        [Ignore]
+        public string UniqueDersAdi
+        {
+            get
+            {
+                return this.DonemId.ToString() + ". Dönem / " + this.DersAdi;
             }
         }
     }

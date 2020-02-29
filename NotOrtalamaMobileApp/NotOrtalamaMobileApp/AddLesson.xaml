@@ -5,27 +5,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="NotOrtalamaMobileApp.AddLesson"
-             Title="Ders Ekle">
+             Title="Ders Ekle - Güncelle">
     <ContentPage.Content>
         <StackLayout BackgroundColor="WhiteSmoke" Spacing="30" Padding="20">
 
-            <Label Text="Eklenecek Ders"/>
+            <Label Text="Güncellenecek veya Tekrar Dersi Secin"/>
 
-            <Picker x:Name="courseToBeAdded" ItemDisplayBinding="{Binding Path=DersAdi}"/>
+            <Picker x:Name="courseToBeUpdated" ItemDisplayBinding="{Binding Path=UniqueDersAdi}" SelectedIndexChanged="courseToBeUpdate_SelectedIndexChanged"/>
 
-            <Label Text="Ders Adı"/>
+            <Label x:Name="courseNameToBeAddedLabel" Text="Eklenecek Yeni Ders Adı Girin"/>
 
-            <Entry x:Name="courseName"/>
+            <Entry x:Name="courseNameToBeAdded"/>
 
-            <Label Text="Ders Kredisi"/>
+            <Label x:Name="courseCreditLabel" Text="Ders Kredisi"/>
 
-            <Entry x:Name="courseCredit"/>
+            <Entry x:Name="courseCredit" Keyboard="Numeric"/>
 
             <Label Text="Harf Notu"/>
 
             <Picker x:Name="letterGrade"/>
 
-            <Button x:Name="addCourse" Text="Ders Ekle" Clicked="addCourse_Clicked"/>
+            <Button x:Name="addOrUpdateCourse" Text="Ders Ekle" Clicked="addOrUpdateCourse_Clicked"/>
 
         </StackLayout>
     </ContentPage.Content>

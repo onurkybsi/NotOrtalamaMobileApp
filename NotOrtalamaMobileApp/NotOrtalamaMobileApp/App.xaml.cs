@@ -23,6 +23,9 @@ namespace NotOrtalamaMobileApp
 
         protected async override void OnStart()
         {
+            //await App.dbManagement.DbSil<Ders>();
+            //await App.dbManagement.DbSil<Donem>();
+
             await App.dbManagement.CreateTable<Ders>();
             await App.dbManagement.CreateTable<Donem>();
         }
