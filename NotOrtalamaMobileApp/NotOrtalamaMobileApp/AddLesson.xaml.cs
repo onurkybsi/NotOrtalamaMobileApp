@@ -1,4 +1,4 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer;
+﻿using NotOrtalamaMobileApp.Infrastructure;
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace NotOrtalamaMobileApp
         public AddLesson(int donemId)
         {
             InitializeComponent();
-            
+
             letterGrade.ItemsSource = new List<string>
             {
                 "AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF", "F0"
@@ -39,7 +39,7 @@ namespace NotOrtalamaMobileApp
                 courseNameToBeAddedLabel.IsVisible = false;
 
                 // Tekrar alinan ders var kredi girisi engelle
-                if(((sender as Picker).SelectedItem as Ders).DonemId != _donemId)
+                if (((sender as Picker).SelectedItem as Ders).DonemId != _donemId)
                 {
                     courseCreditLabel.IsVisible = false;
                     courseCredit.IsVisible = false;
@@ -58,71 +58,43 @@ namespace NotOrtalamaMobileApp
         private async void addOrUpdateCourse_Clicked(object sender, EventArgs e)
         {
             // Update processes
-            if(courseToBeUpdated.SelectedIndex != -1)
+            if (courseToBeUpdated.SelectedIndex != -1)
             {
                 var updatedCourse = (courseToBeUpdated.SelectedItem as Ders);
 
                 // Ayni dersi 2. kez almis
-                if(_donemId != updatedCourse.DonemId)
+                if (_donemId != updatedCourse.DonemId)
                 {
-                    if(letterGrade.SelectedItem == null)
-                        await DisplayAlert("Hata", "Harf notunu girin !", "OK");
-                    else
+                    if(await Validations.CheckUIDersInputThenInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
                     {
-                        await App.dbManagement.InsertEntity<Ders>(new Ders
-                        {
-                            DersAdi = updatedCourse.DersAdi,
-                            DonemId = _donemId,
-                            HarfNotu = letterGrade.SelectedItem.ToString(),
-                            Kredi = updatedCourse.Kredi
-                        });
-
                         await DisplayAlert("Tekrar ders kaydı", "Ders eklendi !", "OK");
                         await Navigation.PopAsync();
                     }
+                    else
+                        await DisplayAlert("Hata", "Harf notunu girin !", "OK");
                 }
                 // Guncelleme yapiyor
                 else
                 {
-
-                    if (letterGrade.SelectedItem == null || string.IsNullOrWhiteSpace(courseCredit.Text))
-                        await DisplayAlert("Hata", "Harf notunu ve ders kredisini girin !", "OK");
-                    else
+                    if(await Validations.CheckUIDersInputThenUpdate(updatedCourse, courseCredit.Text, letterGrade))
                     {
-                        await App.dbManagement.DeleteEntity<Ders>(updatedCourse.Id, "DersTable");
-
-                        await App.dbManagement.InsertEntity<Ders>(new Ders
-                        {
-                            Id = updatedCourse.Id,
-                            DersAdi = updatedCourse.DersAdi,
-                            DonemId = updatedCourse.DonemId,
-                            HarfNotu = letterGrade.SelectedItem.ToString(),
-                            Kredi = Convert.ToInt32(courseCredit.Text)
-                        });
-
                         await DisplayAlert("Güncelleme", "Ders güncellendi !", "OK");
                         await Navigation.PopAsync();
                     }
+                    else
+                        await DisplayAlert("Hata", "Harf notunu ve ders kredisini girin !", "OK");
                 }
             }
             // Insert process
             else
             {
-                if (string.IsNullOrWhiteSpace(courseNameToBeAdded.Text) || string.IsNullOrWhiteSpace(courseCredit.Text) || letterGrade.SelectedItem == null)
-                    await DisplayAlert("Hata", "Ders adını,ders kredisini ve harf notunu girin !", "OK");
-                else
+                if(await Validations.CheckUIDersInputThenInsert(courseNameToBeAdded.Text, _donemId, courseCredit.Text, letterGrade))
                 {
-                    await App.dbManagement.InsertEntity<Ders>(new Ders
-                    {
-                        DersAdi = courseNameToBeAdded.Text,
-                        DonemId = _donemId,
-                        Kredi = Convert.ToInt32(courseCredit.Text),
-                        HarfNotu = letterGrade.ToString()
-                    });
-
                     await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
                     await Navigation.PopAsync();
                 }
+                else
+                    await DisplayAlert("Hata", "Ders adını,ders kredisini ve harf notunu doğru girin !", "OK");
             }
         }
     }
