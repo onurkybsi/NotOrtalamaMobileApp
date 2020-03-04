@@ -1,5 +1,8 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer;
 using NotOrtalamaMobileApp.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace NotOrtalamaMobileApp
@@ -14,6 +17,8 @@ namespace NotOrtalamaMobileApp
 
             dbManagement = new DbManagement();
 
+
+
             MainPage = new NavigationPage(new MainPage())
             {
                 BarBackgroundColor = Color.LightGray,
@@ -26,12 +31,20 @@ namespace NotOrtalamaMobileApp
             //await App.dbManagement.DbSil<Ders>();
             //await App.dbManagement.DbSil<Donem>();
 
-            await App.dbManagement.CreateTable<Ders>();
-            await App.dbManagement.CreateTable<Donem>();
+            await dbManagement.CreateTable<Ders>();
+            await dbManagement.CreateTable<Donem>();
         }
 
-        protected override void OnSleep()
+        protected async override void OnSleep()
         {
+            foreach (int donemId in (await dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
+            {
+                try
+                { 
+                    IEntity donem = await dbManagement.GetEntity<Donem>(donemId); 
+                }
+                catch   { await dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable"); }
+            }
         }
 
         protected override void OnResume()

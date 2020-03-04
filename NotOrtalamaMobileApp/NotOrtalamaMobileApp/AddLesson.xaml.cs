@@ -88,7 +88,8 @@ namespace NotOrtalamaMobileApp
             // Insert process
             else
             {
-                if(await Validations.CheckUIDersInputThenInsert(courseNameToBeAdded.Text, _donemId, courseCredit.Text, letterGrade))
+                // AYNI ISIMLI DERSI INSERT ETMESINE IZIN VERME !!
+                if ((await App.dbManagement.GetEntity<Ders>(x => x.DersAdi = courseNameToBeAdded.Text) == null) && await Validations.CheckUIDersInputThenInsert(courseNameToBeAdded.Text, _donemId, courseCredit.Text, letterGrade))
                 {
                     await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
                     await Navigation.PopAsync();

@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -29,8 +30,23 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
         async public Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new() => await database.Table<T>().ToListAsync();
 
-        async public Task<IEntity> GetEntity<T>(int Id) where T : IEntity, new() => await database.GetAsync<T>(Id);
-        
+        async public Task<IEntity> GetEntity<T>(int Id) where T : IEntity, new()
+        {
+            try
+            {
+                return await database.GetAsync<T>(Id);
+            }
+            catch { return null; }
+        }
+        async public Task<IEntity> GetEntity<T>(Action<T> predicate) where T : IEntity, new()
+        {
+            try
+            {
+                return await database.GetAsync<T>(predicate);
+            }
+            catch { return null; }
+        }
+
         async public Task<List<T>> GetSpecifiedEntities<T>(int donemId, string tableName) where T : IEntity, new() => await database.QueryAsync<T>("SELECT * FROM " + tableName + " WHERE DonemId = ?", donemId);
         
         async public Task<List<T>> GetSpecifiedEntities<T>(string courseName, string tableName) where T : IEntity, new() => await database.QueryAsync<T>("SELECT * FROM " + tableName + " WHERE DersAdi = ?", courseName);

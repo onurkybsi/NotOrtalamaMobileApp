@@ -14,3 +14,4 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\ref\NotOrtalamaMobileApp.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.pdb
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp\obj\Debug\netstandard2.0\NotOrtalamaMobileApp.csprojAssemblyReference.cache
