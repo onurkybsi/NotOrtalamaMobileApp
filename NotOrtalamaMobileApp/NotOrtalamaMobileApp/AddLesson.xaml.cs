@@ -2,6 +2,7 @@
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -47,6 +48,9 @@ namespace NotOrtalamaMobileApp
                 // Düzenlenen ders kredi girisini yaz
                 else
                 {
+                    courseCreditLabel.IsVisible = true;
+                    courseCredit.IsVisible = true;
+
                     courseCredit.Text = (courseToBeUpdated.SelectedItem as Ders).Kredi.ToString();
                 }
 
@@ -64,20 +68,43 @@ namespace NotOrtalamaMobileApp
 
                 // Ayni dersi 2. kez almis
                 if (_donemId != updatedCourse.DonemId)
-                {
-                    if(await Validations.CheckUIDersInputThenInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
+                {   
+                    if(await Validations.CheckUIDersInputForInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
                     {
+                        await App.dbManagement.InsertEntity<Ders>(new Ders
+                        {
+                            DersAdi = updatedCourse.DersAdi.Trim(),
+                            DonemId = _donemId,
+                            Kredi = updatedCourse.Kredi,
+                            HarfNotu = letterGrade.SelectedItem.ToString()
+                        });
+
                         await DisplayAlert("Tekrar ders kaydı", "Ders eklendi !", "OK");
                         await Navigation.PopAsync();
                     }
                     else
-                        await DisplayAlert("Hata", "Harf notunu girin !", "OK");
+                    {
+                        await DisplayAlert("Hata", "Bu ders zaten alınmış !", "OK");
+                    }
                 }
                 // Guncelleme yapiyor
                 else
                 {
-                    if(await Validations.CheckUIDersInputThenUpdate(updatedCourse, courseCredit.Text, letterGrade))
+                    if (Validations.CheckUIDersInputForUpdate(courseCredit.Text, letterGrade))
                     {
+                        foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>(updatedCourse.DersAdi, "DersTable"))
+                        {
+                            await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
+
+                            await App.dbManagement.InsertEntity<Ders>(new Ders
+                            {
+                                DersAdi = sameCourses.DersAdi,
+                                DonemId = sameCourses.DonemId,
+                                Kredi = Convert.ToInt32(courseCredit.Text),
+                                HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
+                            });
+                        }
+
                         await DisplayAlert("Güncelleme", "Ders güncellendi !", "OK");
                         await Navigation.PopAsync();
                     }
@@ -88,14 +115,22 @@ namespace NotOrtalamaMobileApp
             // Insert process
             else
             {
-                // AYNI ISIMLI DERSI INSERT ETMESINE IZIN VERME !!
-                if ((await App.dbManagement.GetEntity<Ders>(x => x.DersAdi = courseNameToBeAdded.Text) == null) && await Validations.CheckUIDersInputThenInsert(courseNameToBeAdded.Text, _donemId, courseCredit.Text, letterGrade))
+
+                if (await Validations.CheckUIDersInputForInsert(courseNameToBeAdded.Text.Trim(), _donemId, courseCredit.Text, letterGrade))
                 {
+                    await App.dbManagement.InsertEntity<Ders>(new Ders
+                    {
+                        DersAdi = courseNameToBeAdded.Text.Trim(),
+                        DonemId = _donemId,
+                        Kredi = Convert.ToInt32(courseCredit.Text),
+                        HarfNotu = letterGrade.SelectedItem.ToString()
+                    });
+
                     await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
                     await Navigation.PopAsync();
                 }
                 else
-                    await DisplayAlert("Hata", "Ders adını,ders kredisini ve harf notunu doğru girin !", "OK");
+                    await DisplayAlert("Hata", "Ders adını,ders kredisini ve harf notunu doğru girin yada aynı dersi kaydetmeye çalışmayın !", "OK");
             }
         }
     }

@@ -9,7 +9,7 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <ListView x:Name="listView" SeparatorColor="Black" >
+            <ListView x:Name="listView" SeparatorColor="Black">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
