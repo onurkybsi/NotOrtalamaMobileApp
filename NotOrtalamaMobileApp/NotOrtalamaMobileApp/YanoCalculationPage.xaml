@@ -39,11 +39,11 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
 
                 <Label Text="YANO :" FontSize="Large"/>
-                <Label Text="3.30" FontSize="Large" FontAttributes="Bold"/>
+                <Label x:Name="YanoResult" Text="3.30" FontSize="Large" FontAttributes="Bold"/>
 
             </StackLayout>
 
-            <Button x:Name="calculateYano" Text="Hesapla" Margin="0,0,0,50"/>
+            <Button x:Name="calculateYano" Text="Hesapla" Margin="0,0,0,50" Clicked="calculateYano_Clicked"/>
 
             <Button x:Name="insertDonemToRepo" Text="Kayıtlı Dönemlere Ekle" HorizontalOptions="End" Clicked="insertDonemToRepo_Clicked" IsEnabled="False"/>
 

@@ -1,4 +1,5 @@
-﻿using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.Infrastructure;
+using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -87,6 +88,11 @@ namespace NotOrtalamaMobileApp
             var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>((sender as Picker).SelectedIndex, "DersTable");
 
             lessonToBeDeleted.ItemsSource = itemsSource.Count > 0 ? itemsSource : null;
+        }
+
+        private async void calculateYano_Clicked(object sender, EventArgs e)
+        {
+            YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable")).ToString("#.##");
         }
     }
 }
