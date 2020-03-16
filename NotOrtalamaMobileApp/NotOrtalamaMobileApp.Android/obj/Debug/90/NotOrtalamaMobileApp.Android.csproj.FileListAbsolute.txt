@@ -486,4 +486,3 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalam
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
-C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileApp\NotOrtalamaMobileApp.Android\obj\Debug\90\stamp\SetupDependenciesForDesigner.stamp

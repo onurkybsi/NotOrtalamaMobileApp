@@ -1,4 +1,5 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer;
+using NotOrtalamaMobileApp.Infrastructure;
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,11 @@ namespace NotOrtalamaMobileApp
         {
             InitializeComponent();
             
+        }
+
+        protected async override void OnAppearing()
+        {
+            lastCalculatedAGNO.Text = Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>).ToString("#.##");
         }
 
         private async void toYano_Clicked(object sender, EventArgs e)

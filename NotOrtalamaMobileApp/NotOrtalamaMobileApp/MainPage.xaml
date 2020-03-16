@@ -21,8 +21,8 @@
 
             <StackLayout Orientation="Horizontal" Padding="50,20,0,0">
 
-                <Label Text="Son Hesaplanan AGNO:"/>
-                <Label x:Name="lastCalculatedAGNO" Text="2.29"/>
+                <Label Text="Son Hesaplanan AGNO:" FontSize="Large"/>
+                <Label x:Name="lastCalculatedAGNO" Text="2.29" FontSize="Large" FontAttributes="Bold"/>
 
             </StackLayout>
 

@@ -25,7 +25,6 @@ namespace NotOrtalamaMobileApp
             _donemId = donemId;
         }
 
-        // On Appering
         protected async override void OnAppearing()
         {
             courseToBeUpdated.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;

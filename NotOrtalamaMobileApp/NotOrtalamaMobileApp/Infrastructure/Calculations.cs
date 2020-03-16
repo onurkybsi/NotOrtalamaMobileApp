@@ -19,5 +19,34 @@ namespace NotOrtalamaMobileApp.Infrastructure
 
             return grades / totalKredi;
         }
+
+        public static double AGNOCalculate(List<Ders> dersler)
+        {
+            double grades = 0.0;
+            int totalKredi = 0;
+            bool IsThatLastOne = true;
+
+            foreach (Ders ders1 in dersler)
+            {
+                foreach (Ders ders2 in dersler)
+                {
+                    IsThatLastOne = true;
+
+                    if (ders1.DersAdi == ders2.DersAdi && ders1.DonemId < ders2.DonemId)
+                    {
+                        IsThatLastOne = false;
+                        break;
+                    }
+                }
+
+                if (IsThatLastOne)
+                {
+                    grades += ders1.DersEtki;
+                    totalKredi += ders1.Kredi;
+                }
+            }
+
+            return grades / totalKredi;
+        }
     }
 }
