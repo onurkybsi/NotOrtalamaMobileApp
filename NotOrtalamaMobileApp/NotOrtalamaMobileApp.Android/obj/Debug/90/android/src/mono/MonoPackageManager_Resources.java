@@ -4,6 +4,7 @@ public class MonoPackageManager_Resources {
 		/* We need to ensure that "NotOrtalamaMobileApp.Android.dll" comes first in this list. */
 		"NotOrtalamaMobileApp.Android.dll",
 		"FormsViewGroup.dll",
+		"Ninject.dll",
 		"NotOrtalamaMobileApp.dll",
 		"SQLite-net.dll",
 		"SQLitePCLRaw.batteries_green.dll",

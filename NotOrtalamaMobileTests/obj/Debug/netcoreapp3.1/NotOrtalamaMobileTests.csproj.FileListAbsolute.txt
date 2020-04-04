@@ -116,3 +116,4 @@ C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileTests\bin\Debu
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileTests\bin\Debug\netcoreapp3.1\NotOrtalamaMobileApp.pdb
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileTests\obj\Debug\netcoreapp3.1\NotOrtalamaMobileTests.dll
 C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileTests\obj\Debug\netcoreapp3.1\NotOrtalamaMobileTests.pdb
+C:\Users\onurb\Source\Repos\NotOrtalamaMobileApp\NotOrtalamaMobileTests\bin\Debug\netcoreapp3.1\Ninject.dll

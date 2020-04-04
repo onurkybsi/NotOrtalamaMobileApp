@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using NotOrtalamaMobileApp.Tables;
+using System.Linq;
 
 namespace NotOrtalamaMobileApp.Droid
 {
@@ -29,5 +31,15 @@ namespace NotOrtalamaMobileApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        protected async override void OnDestroy()
+        {
+            foreach (int donemId in (await App.dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
+            {
+                if (await App.dbManagement.GetEntity<Donem>(donemId) == null)
+                    await App.dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
+            }
+        }
+        
     }
 }

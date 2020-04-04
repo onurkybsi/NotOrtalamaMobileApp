@@ -13,10 +13,11 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
     {
         private SQLiteAsyncConnection database;
 
-        public DbManagement()
-        {
-            database = DependencyService.Get<ISQLiteDb>().GetConnection();
-        }
+        private static DbManagement _dbManagement;
+
+        private DbManagement() {    database = DependencyService.Get<ISQLiteDb>().GetConnection();  }
+
+        public static DbManagement CreateAsSingleton() => _dbManagement ?? (_dbManagement = new DbManagement());
 
         async public Task<CreateTableResult> CreateTable<T>() where T : IEntity, new() => await database.CreateTableAsync<T>();
 

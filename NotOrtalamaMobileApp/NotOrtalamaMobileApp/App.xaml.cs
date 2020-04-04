@@ -15,9 +15,7 @@ namespace NotOrtalamaMobileApp
         {
             InitializeComponent();
 
-            dbManagement = new DbManagement();
-
-
+            dbManagement = DbManagement.CreateAsSingleton();
 
             MainPage = new NavigationPage(new MainPage())
             {
@@ -33,19 +31,12 @@ namespace NotOrtalamaMobileApp
 
             await dbManagement.CreateTable<Ders>();
             await dbManagement.CreateTable<Donem>();
-        }
 
-        protected async override void OnSleep()
-        {
-            foreach (int donemId in (await dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
+            foreach (int donemId in (await App.dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
             {
-                if(await dbManagement.GetEntity<Donem>(donemId) == null)
-                    await dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
+                if (await App.dbManagement.GetEntity<Donem>(donemId) == null)
+                    await App.dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
             }
-        }
-
-        protected override void OnResume()
-        {
         }
     }
 }
