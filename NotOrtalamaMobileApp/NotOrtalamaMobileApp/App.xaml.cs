@@ -26,15 +26,12 @@ namespace NotOrtalamaMobileApp
 
         protected async override void OnStart()
         {
-            //await App.dbManagement.DbSil<Ders>();
-            //await App.dbManagement.DbSil<Donem>();
-
             await dbManagement.CreateTable<Ders>();
             await dbManagement.CreateTable<Donem>();
 
             foreach (int donemId in (await App.dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
             {
-                if (await App.dbManagement.GetEntity<Donem>(donemId) == null)
+                if (await App.dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
                     await App.dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
             }
         }

@@ -36,7 +36,7 @@ namespace NotOrtalamaMobileApp.Droid
         {
             foreach (int donemId in (await App.dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
             {
-                if (await App.dbManagement.GetEntity<Donem>(donemId) == null)
+                if (await App.dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
                     await App.dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
             }
         }
