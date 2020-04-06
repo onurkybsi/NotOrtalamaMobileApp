@@ -30,16 +30,6 @@ namespace NotOrtalamaMobileApp.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        protected async override void OnDestroy()
-        {
-            foreach (int donemId in (await App.dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
-            {
-                if (await App.dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
-                    await App.dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
-            }
-        }
-        
+        }        
     }
 }

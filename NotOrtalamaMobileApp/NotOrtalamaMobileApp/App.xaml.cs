@@ -9,13 +9,13 @@ namespace NotOrtalamaMobileApp
 {
     public partial class App : Application
     {
-        public static DbManagement dbManagement;
+        public static IDbManagement dbManagement;
 
         public App()
         {
-            InitializeComponent();
-
             dbManagement = DbManagement.CreateAsSingleton();
+
+            InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage())
             {
@@ -28,11 +28,14 @@ namespace NotOrtalamaMobileApp
         {
             await dbManagement.CreateTable<Ders>();
             await dbManagement.CreateTable<Donem>();
+        }
 
-            foreach (int donemId in (await App.dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
+        protected async override void OnSleep()
+        {
+            foreach (int donemId in (await dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
             {
-                if (await App.dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
-                    await App.dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
+                if (await dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
+                    await dbManagement.DeleteSpecifiedEntities<Ders>(donemId, "DersTable");
             }
         }
     }
