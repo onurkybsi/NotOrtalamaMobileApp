@@ -91,7 +91,11 @@ namespace NotOrtalamaMobileApp
                 {
                     if (Validations.CheckUIDersInputForUpdate(courseCredit.Text, letterGrade))
                     {
-                        foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>(updatedCourse.DersAdi, "DersTable"))
+                        // Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>(updatedCourse.DersAdi, "DersTable")
+                        foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object> 
+                        {
+                            ["DersAdi"] = updatedCourse.DersAdi
+                        }))
                         {
                             await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 

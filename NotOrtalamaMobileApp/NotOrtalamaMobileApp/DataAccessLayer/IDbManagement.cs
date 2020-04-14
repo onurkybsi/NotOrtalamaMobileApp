@@ -13,6 +13,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
         Task<List<T>> GetSpecifiedEntities<T>(int donemId, string tableName) where T : IEntity, new();
         Task<List<T>> GetSpecifiedEntities<T>(string courseName, string tableName) where T : IEntity, new();
+        Task<List<T>> GetSpecifiedEntities<T>(string tableName, Dictionary<string, object> filter) where T : IEntity, new();
         Task<IEntity> GetEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
         Task DbSil<T>() where T : IEntity, new();

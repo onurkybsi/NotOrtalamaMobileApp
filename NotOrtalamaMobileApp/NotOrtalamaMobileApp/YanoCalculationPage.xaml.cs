@@ -15,7 +15,7 @@ namespace NotOrtalamaMobileApp
         {
             InitializeComponent();
 
-            semesters.ItemsSource = new List<string> { "Hiçbiri","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16" };
+            semesters.ItemsSource = new List<string> { "Hiçbiri", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" };
         }
 
         // OnAppering
@@ -23,7 +23,12 @@ namespace NotOrtalamaMobileApp
         {
             insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
 
-            lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable");
+            //lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable");
+            lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
+            {
+                ["DonemId"] = semesters.SelectedIndex
+
+            });
         }
 
         // Delete course.
@@ -82,14 +87,22 @@ namespace NotOrtalamaMobileApp
         {
             insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
 
-            var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>((sender as Picker).SelectedIndex, "DersTable");
+            //var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>((sender as Picker).SelectedIndex, "DersTable");
+            var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
+            {
+                ["DonemId"] = (sender as Picker).SelectedIndex
+            });
 
             lessonToBeDeleted.ItemsSource = itemsSource.Count > 0 ? itemsSource : null;
         }
 
         private async void calculateYano_Clicked(object sender, EventArgs e)
         {
-            YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable")).ToString("#.##");
+            //YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable")).ToString("#.##");
+            YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object> 
+            {
+                ["DonemId"] = semesters.SelectedIndex
+            })).ToString("#.##");
         }
     }
 }
