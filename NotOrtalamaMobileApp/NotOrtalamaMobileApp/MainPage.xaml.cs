@@ -25,7 +25,9 @@ namespace NotOrtalamaMobileApp
 
         protected async override void OnAppearing()
         {
-            lastCalculatedAGNO.Text = Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>).ToString("#.##");
+            lastCalculatedAGNO.Text = Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>) == -1
+                ? "-"
+                : Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>).ToString("##.#");
         }
 
         private async void toYano_Clicked(object sender, EventArgs e)

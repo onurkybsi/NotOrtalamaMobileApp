@@ -23,7 +23,6 @@ namespace NotOrtalamaMobileApp
         {
             insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
 
-            //lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable");
             lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
             {
                 ["DonemId"] = semesters.SelectedIndex
@@ -70,14 +69,20 @@ namespace NotOrtalamaMobileApp
         private async void insertDonemToRepo_Clicked(object sender, EventArgs e)
         {
             if (lessonToBeDeleted.Items.Count <= 0)
+            {
                 await DisplayAlert("Hata", "Kaydedilecek dönem için dersler girin !", "OK");
+            }
             else
             {
-                await App.dbManagement.InsertEntity<Donem>(new Donem
+                var deneme = await App.dbManagement.GetEntity<Donem>(d => d.Id == Convert.ToInt32(semesters.SelectedItem));
+                if (deneme == null)
                 {
-                    Id = Convert.ToInt32(semesters.SelectedItem)
-                });
-
+                    await App.dbManagement.InsertEntity<Donem>(new Donem
+                    {
+                        Id = Convert.ToInt32(semesters.SelectedItem)
+                    });
+                }
+                
                 await DisplayAlert("Dönem Kayıt", "Kayıt edildi !", "OK");
             }
         }

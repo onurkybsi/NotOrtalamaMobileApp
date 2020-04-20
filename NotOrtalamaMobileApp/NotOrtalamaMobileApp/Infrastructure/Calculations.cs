@@ -46,7 +46,7 @@ namespace NotOrtalamaMobileApp.Infrastructure
                 }
             }
 
-            return grades / totalKredi;
+            return totalKredi == 0 ? -1 : (grades / totalKredi);
         }
     }
 }
