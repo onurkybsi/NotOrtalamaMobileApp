@@ -57,7 +57,7 @@ namespace NotOrtalamaMobileApp
             }
         }
 
-        // Add course
+        // Add or update course
         private async void addOrUpdateCourse_Clicked(object sender, EventArgs e)
         {
             // Update processes

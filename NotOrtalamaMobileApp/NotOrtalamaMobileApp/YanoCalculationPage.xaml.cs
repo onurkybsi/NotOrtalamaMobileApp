@@ -55,7 +55,7 @@ namespace NotOrtalamaMobileApp
         {
             if (semesters.SelectedItem != null)
             {
-                int donemId = (semesters.SelectedItem.ToString() == "Hiçbiri") ? 0 : Convert.ToInt32(semesters.SelectedItem);
+                int donemId = (semesters.SelectedItem.ToString() == "Hiçbiri") ? 0 : semesters.SelectedIndex;
 
                 await Navigation.PushAsync(new AddLesson(donemId));
             }
@@ -74,8 +74,8 @@ namespace NotOrtalamaMobileApp
             }
             else
             {
-                var deneme = await App.dbManagement.GetEntity<Donem>(d => d.Id == Convert.ToInt32(semesters.SelectedItem));
-                if (deneme == null)
+
+                if(await App.dbManagement.GetEntity<Donem>(d => d.Id == semesters.SelectedIndex) == null)
                 {
                     await App.dbManagement.InsertEntity<Donem>(new Donem
                     {
@@ -92,7 +92,6 @@ namespace NotOrtalamaMobileApp
         {
             insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
 
-            //var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>((sender as Picker).SelectedIndex, "DersTable");
             var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
             {
                 ["DonemId"] = (sender as Picker).SelectedIndex
@@ -103,9 +102,10 @@ namespace NotOrtalamaMobileApp
 
         private async void calculateYano_Clicked(object sender, EventArgs e)
         {
-            //YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>(semesters.SelectedIndex, "DersTable")).ToString("#.##");
+
             YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object> 
             {
+                
                 ["DonemId"] = semesters.SelectedIndex
             })).ToString("#.##");
         }
