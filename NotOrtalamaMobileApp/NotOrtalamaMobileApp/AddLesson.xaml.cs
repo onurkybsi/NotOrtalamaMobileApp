@@ -27,7 +27,14 @@ namespace NotOrtalamaMobileApp
 
         protected async override void OnAppearing()
         {
-            courseToBeUpdated.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
+            List<KeyValuePair<string, object>> filters = new List<KeyValuePair<string, object>>();
+
+            for (int i = _donemId; i > 0; i--) 
+            {
+                filters.Add(new KeyValuePair <string, object>("DonemId", i));
+            }
+
+            courseToBeUpdated.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", filters, DataAccessLayer.Processes.Get);
         }
 
         // Select course to be update
@@ -67,8 +74,8 @@ namespace NotOrtalamaMobileApp
 
                 // Ayni dersi 2. kez almis
                 if (_donemId != updatedCourse.DonemId)
-                {   
-                    if(await Validations.CheckUIDersInputForInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
+                {
+                    if (await Validations.CheckUIDersInputForInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
                     {
                         await App.dbManagement.InsertEntity<Ders>(new Ders
                         {
@@ -92,10 +99,10 @@ namespace NotOrtalamaMobileApp
                     if (Validations.CheckUIDersInputForUpdate(courseCredit.Text, letterGrade))
                     {
                         // Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>(updatedCourse.DersAdi, "DersTable")
-                        foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object> 
+                        foreach (Ders sameCourses in await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
                         {
-                            ["DersAdi"] = updatedCourse.DersAdi
-                        }))
+                           new KeyValuePair<string, object>("DersAdi", updatedCourse.DersAdi)
+                        }, DataAccessLayer.Processes.Get))
                         {
                             await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 

@@ -23,11 +23,10 @@ namespace NotOrtalamaMobileApp
         {
             insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
 
-            lessonToBeDeleted.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
+            lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
-                ["DonemId"] = semesters.SelectedIndex
-
-            });
+                new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
+            }, DataAccessLayer.Processes.Get);
         }
 
         // Delete course.
@@ -41,7 +40,10 @@ namespace NotOrtalamaMobileApp
 
                     await App.dbManagement.DeleteEntity<Ders>(toBeDeleted, "DersTable");
 
-                    lessonToBeDeleted.ItemsSource = await App.dbManagement.GetAllEntities<Ders>() as List<Ders>;
+                    lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+                    {
+                        new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
+                    }, DataAccessLayer.Processes.Get);
                 }
             }
             else
@@ -75,14 +77,14 @@ namespace NotOrtalamaMobileApp
             else
             {
 
-                if(await App.dbManagement.GetEntity<Donem>(d => d.Id == semesters.SelectedIndex) == null)
+                if (await App.dbManagement.GetEntity<Donem>(d => d.Id == semesters.SelectedIndex) == null)
                 {
                     await App.dbManagement.InsertEntity<Donem>(new Donem
                     {
                         Id = Convert.ToInt32(semesters.SelectedItem)
                     });
                 }
-                
+
                 await DisplayAlert("Dönem Kayıt", "Kayıt edildi !", "OK");
             }
         }
@@ -92,10 +94,10 @@ namespace NotOrtalamaMobileApp
         {
             insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
 
-            var itemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
+            var itemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
-                ["DonemId"] = (sender as Picker).SelectedIndex
-            });
+                new KeyValuePair<string, object>("DonemId", (sender as Picker).SelectedIndex)
+            }, DataAccessLayer.Processes.Get);
 
             lessonToBeDeleted.ItemsSource = itemsSource.Count > 0 ? itemsSource : null;
         }
@@ -103,11 +105,10 @@ namespace NotOrtalamaMobileApp
         private async void calculateYano_Clicked(object sender, EventArgs e)
         {
 
-            YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object> 
+            YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
-                
-                ["DonemId"] = semesters.SelectedIndex
-            })).ToString("#.##");
+                new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
+            }, DataAccessLayer.Processes.Get)).ToString("#.##");
         }
     }
 }

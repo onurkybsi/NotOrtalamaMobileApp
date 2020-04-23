@@ -35,10 +35,12 @@ namespace NotOrtalamaMobileApp
             foreach (int donemId in (await dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
             {
                 if (await dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
-                    await dbManagement.DeleteSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
+                {
+                    await dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
                     {
-                        ["DonemId"] = donemId
-                    });
+                        new KeyValuePair<string, object>("DonemId", donemId)
+                    }, Processes.Delete);
+                }
             }
         }
     }

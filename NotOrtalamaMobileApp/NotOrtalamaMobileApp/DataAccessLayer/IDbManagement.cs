@@ -11,11 +11,10 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
     {
         Task<CreateTableResult> CreateTable<T>() where T : IEntity, new();
         Task<IEntity> GetEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntity, new();
-        Task<List<T>> GetSpecifiedEntities<T>(string tableName, Dictionary<string, object> filter) where T : IEntity, new();
+        Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes processes) where T : IEntity, new();
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
         Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new();
-        Task<List<T>> DeleteSpecifiedEntities<T>(string tableName, Dictionary<string, object> filter) where T : IEntity, new();
         Task DbSil<T>() where T : IEntity, new();
     }
 }

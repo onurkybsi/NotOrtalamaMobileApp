@@ -25,15 +25,16 @@ namespace NotOrtalamaMobileApp
         {
             var semester = ((MenuItem)sender).CommandParameter;
 
-            await App.dbManagement.DeleteSpecifiedEntities<Ders>("DersTable", new Dictionary<string, object>
+            await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
-                ["DonemId"] = (semester as Donem).Id
-            });
+                new KeyValuePair<string, object>("DonemId", (semester as Donem).Id)
+
+            }, Processes.Delete);
 
             await App.dbManagement.DeleteEntity<Donem>((semester as Donem).Id, "DonemTable");
 
             listView.ItemsSource = await App.dbManagement.GetAllEntities<Donem>() as List<Donem>;
-            
+
             await DisplayAlert("Dönem Sil", "Silindi !", "OK");
         }
     }
