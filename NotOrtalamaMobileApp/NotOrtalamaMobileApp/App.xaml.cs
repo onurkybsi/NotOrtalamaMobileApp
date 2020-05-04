@@ -1,6 +1,5 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer;
 using NotOrtalamaMobileApp.Tables;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -27,21 +26,14 @@ namespace NotOrtalamaMobileApp
         protected async override void OnStart()
         {
             await dbManagement.CreateTable<Ders>();
-            await dbManagement.CreateTable<Donem>();
         }
 
         protected async override void OnSleep()
         {
-            foreach (int donemId in (await dbManagement.GetAllEntities<Ders>()).Select(x => x.DonemId).Distinct())
+            await dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
-                if (await dbManagement.GetEntity<Donem>(x => x.Id == donemId) == null)
-                {
-                    await dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
-                    {
-                        new KeyValuePair<string, object>("DonemId", donemId)
-                    }, Processes.Delete);
-                }
-            }
+                new KeyValuePair<string, object>("DonemId", 0)
+            }, Processes.Delete);
         }
     }
 }

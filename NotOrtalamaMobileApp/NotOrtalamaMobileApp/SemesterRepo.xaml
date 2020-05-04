@@ -22,7 +22,7 @@
 
                             <StackLayout x:Name="item" Orientation="Vertical">
 
-                                <Label x:Name="donemAdi" Text="{Binding Path=DonemAdi}" FontSize="Medium" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                <Label x:Name="donemAdi" Text="{Binding Path=SemesterName}" FontSize="Medium" VerticalOptions="Center" Margin="10,0,0,0"/>
                                 <Label x:Name="yano"/>
 
                             </StackLayout>

@@ -2,7 +2,6 @@
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +20,7 @@ namespace NotOrtalamaMobileApp
         // OnAppering
         protected async override void OnAppearing()
         {
-            insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
+            //insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
 
             lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
@@ -67,32 +66,10 @@ namespace NotOrtalamaMobileApp
             }
         }
 
-        // Insert Donem to repository.
-        private async void insertDonemToRepo_Clicked(object sender, EventArgs e)
-        {
-            if (lessonToBeDeleted.Items.Count <= 0)
-            {
-                await DisplayAlert("Hata", "Kaydedilecek dönem için dersler girin !", "OK");
-            }
-            else
-            {
-
-                if (await App.dbManagement.GetEntity<Donem>(d => d.Id == semesters.SelectedIndex) == null)
-                {
-                    await App.dbManagement.InsertEntity<Donem>(new Donem
-                    {
-                        Id = Convert.ToInt32(semesters.SelectedItem)
-                    });
-                }
-
-                await DisplayAlert("Dönem Kayıt", "Kayıt edildi !", "OK");
-            }
-        }
-
         // Enable or disable "insertDonemToRepo" button.
         private async void semesters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
+            //insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
 
             var itemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {

@@ -1,12 +1,8 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer;
-using NotOrtalamaMobileApp.Infrastructure;
+﻿using NotOrtalamaMobileApp.Infrastructure;
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotOrtalamaMobileApp
@@ -20,14 +16,13 @@ namespace NotOrtalamaMobileApp
         public MainPage()
         {
             InitializeComponent();
-            
         }
 
         protected async override void OnAppearing()
         {
-            lastCalculatedAGNO.Text = Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>) == -1
-                ? "-"
-                : Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>).ToString("##.#");
+            double agno = Calculations.AGNOCalculate(await App.dbManagement.GetAllEntities<Ders>() as List<Ders>);
+
+            lastCalculatedAGNO.Text = (agno == -1) ? "-" : agno.ToString("##.#");
         }
 
         private async void toYano_Clicked(object sender, EventArgs e)
@@ -35,14 +30,14 @@ namespace NotOrtalamaMobileApp
             await Navigation.PushAsync(new YanoCalculationPage());
         }
 
-        private async void yanoRepo_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SemesterRepo());
-        }
-
         private async void toAgno_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AgnoCalculationPage());
         }
+
+        private async void yanoRepo_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SemesterRepo());
+        }   
     }
 }

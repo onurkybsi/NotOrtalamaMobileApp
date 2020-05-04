@@ -17,11 +17,10 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
         private DbManagement() { database = DependencyService.Get<ISQLiteDb>().GetConnection(); }
         public static DbManagement CreateAsSingleton() => _dbManagement ?? (_dbManagement = new DbManagement());
-
         async public Task<CreateTableResult> CreateTable<T>() where T : IEntity, new() => await database.CreateTableAsync<T>();
-        async public Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes processes) where T : IEntity, new()
+        async public Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes process) where T : IEntity, new()
         {
-            string filterExpressions = processes == Processes.Get
+            string filterExpressions = process == Processes.Get
                 ? "SELECT * FROM " + tableName + " WHERE"
                 : "DELETE FROM " + tableName + " WHERE";
 

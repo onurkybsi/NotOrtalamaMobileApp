@@ -45,7 +45,7 @@
 
             <Button x:Name="calculateYano" Text="Hesapla" Margin="0,0,0,50" Clicked="calculateYano_Clicked"/>
 
-            <Button x:Name="insertDonemToRepo" Text="Kayıtlı Dönemlere Ekle" HorizontalOptions="End" Clicked="insertDonemToRepo_Clicked" IsEnabled="False"/>
+            <!--<Button x:Name="insertDonemToRepo" Text="Kayıtlı Dönemlere Ekle" HorizontalOptions="End" Clicked="insertDonemToRepo_Clicked" IsEnabled="False"/>-->
 
 
         </StackLayout>
