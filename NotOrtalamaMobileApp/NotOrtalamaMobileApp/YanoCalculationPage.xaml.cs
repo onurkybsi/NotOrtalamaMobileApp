@@ -20,18 +20,19 @@ namespace NotOrtalamaMobileApp
         // OnAppering
         protected async override void OnAppearing()
         {
-            //insertDonemToRepo.IsEnabled = semesters.SelectedIndex > 0;
-
-            lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+            if (semesters.SelectedIndex > -1)
             {
-                new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
-            }, DataAccessLayer.Processes.Get);
+                lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
+                }, DataAccessLayer.Processes.Get);
+            }
         }
 
         // Delete course.
         private async void deleteLesson_Clicked(object sender, EventArgs e)
         {
-            if (!Object.Equals(lessonToBeDeleted.SelectedItem, null))
+            if (lessonToBeDeleted.SelectedItem != null)
             {
                 if (await DisplayAlert("Ders Sil", "Emin misiniz ?", "Evet", "Hayır"))
                 {
@@ -56,7 +57,9 @@ namespace NotOrtalamaMobileApp
         {
             if (semesters.SelectedItem != null)
             {
-                int donemId = (semesters.SelectedItem.ToString() == "Hiçbiri") ? 0 : semesters.SelectedIndex;
+                int donemId = semesters.SelectedIndex > 0
+                    ? semesters.SelectedIndex
+                    : 0;
 
                 await Navigation.PushAsync(new AddLesson(donemId));
             }
@@ -66,10 +69,8 @@ namespace NotOrtalamaMobileApp
             }
         }
 
-        // Enable or disable "insertDonemToRepo" button.
         private async void semesters_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //insertDonemToRepo.IsEnabled = (sender as Picker).SelectedIndex > 0;
 
             var itemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
@@ -86,6 +87,18 @@ namespace NotOrtalamaMobileApp
             {
                 new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
             }, DataAccessLayer.Processes.Get)).ToString("#.##");
+        }
+
+        // ProcessSpecifiedEntities islemi kod tekrarini gidermek lazim.
+        private static List<Ders> GetCoursesOfSelectedSemester(int donemId)
+        {
+            return null;
+        }
+
+        // YANOCalculate metodunu button'la tetiklemek yerine her eklenen ve silinen derste otomatik yenileyelim.Metodun string dönüşünüde burda yazalım.
+        private static string YanoCalculate(int donemId)
+        {
+            return string.Empty;
         }
     }
 }
