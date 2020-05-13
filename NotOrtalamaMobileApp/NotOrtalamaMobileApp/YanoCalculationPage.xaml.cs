@@ -2,6 +2,7 @@
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,10 +23,7 @@ namespace NotOrtalamaMobileApp
         {
             if (semesters.SelectedIndex > -1)
             {
-                lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
-                {
-                    new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
-                }, DataAccessLayer.Processes.Get);
+                lessonToBeDeleted.ItemsSource = await GetCoursesOfSelectedSemester(semesters.SelectedIndex);
             }
         }
 
@@ -40,10 +38,7 @@ namespace NotOrtalamaMobileApp
 
                     await App.dbManagement.DeleteEntity<Ders>(toBeDeleted, "DersTable");
 
-                    lessonToBeDeleted.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
-                    {
-                        new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
-                    }, DataAccessLayer.Processes.Get);
+                    lessonToBeDeleted.ItemsSource = await GetCoursesOfSelectedSemester(semesters.SelectedIndex);
                 }
             }
             else
@@ -72,33 +67,23 @@ namespace NotOrtalamaMobileApp
         private async void semesters_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            var itemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("DonemId", (sender as Picker).SelectedIndex)
-            }, DataAccessLayer.Processes.Get);
+            var itemsSource = await GetCoursesOfSelectedSemester((sender as Picker).SelectedIndex);
 
             lessonToBeDeleted.ItemsSource = itemsSource.Count > 0 ? itemsSource : null;
         }
-
+        
         private async void calculateYano_Clicked(object sender, EventArgs e)
         {
 
-            YanoResult.Text = Calculations.YANOCalculate(await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+            YanoResult.Text = Calculations.YANOCalculate(await GetCoursesOfSelectedSemester(semesters.SelectedIndex)).ToString("#.##");
+        }
+
+        private static async Task<List<Ders>> GetCoursesOfSelectedSemester(int donemId)
+        {
+            return await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("DonemId", semesters.SelectedIndex)
-            }, DataAccessLayer.Processes.Get)).ToString("#.##");
-        }
-
-        // ProcessSpecifiedEntities islemi kod tekrarini gidermek lazim.
-        private static List<Ders> GetCoursesOfSelectedSemester(int donemId)
-        {
-            return null;
-        }
-
-        // YANOCalculate metodunu button'la tetiklemek yerine her eklenen ve silinen derste otomatik yenileyelim.Metodun string dönüşünüde burda yazalım.
-        private static string YanoCalculate(int donemId)
-        {
-            return string.Empty;
+                new KeyValuePair<string, object>("DonemId", donemId)
+            }, DataAccessLayer.Processes.Get);
         }
     }
 }
