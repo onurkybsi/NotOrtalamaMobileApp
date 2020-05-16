@@ -13,7 +13,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         private static DbManagement _dbManagement;
         private SQLiteAsyncConnection database;
 
-        private Page CurrentPage { get; set; }
+        private static Page CurrentPage { get; set; }
+
         public delegate void DelegateOfManipulation(Processes processes);
         public event DelegateOfManipulation EventOfManipulation;
 
@@ -22,7 +23,12 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
             database = DependencyService.Get<ISQLiteDb>().GetConnection();
             EventOfManipulation += ExecuteAfterManipulation;
         }
-        public static DbManagement CreateAsSingleton() => _dbManagement ?? (_dbManagement = new DbManagement());
+        public static DbManagement CreateAsSingleton(Application app)
+        {
+            app.PageAppearing += SetCurrentPage;
+            return _dbManagement ?? (_dbManagement = new DbManagement());
+        }
+
         async public Task<CreateTableResult> CreateTable<T>() where T : IEntity, new() => await database.CreateTableAsync<T>();
         async public Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes process) where T : IEntity, new()
         {
@@ -96,13 +102,9 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
             }
             else if(processes == Processes.Delete)
             {
-                await CurrentPage.DisplayAlert("Automatic information display test", "Insert", "OK");
+                await CurrentPage.DisplayAlert("Automatic information display test", "Delete", "OK");
             }
         }
-        public void SetCurrentPage(Page page)
-        {
-            CurrentPage = page;
-        }
-        async public Task DbSil<T>() where T : IEntity, new() => await database.DropTableAsync<T>();
+        private static void SetCurrentPage(object sender, Page e) => CurrentPage = e;
     }
 }

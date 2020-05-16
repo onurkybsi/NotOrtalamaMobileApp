@@ -29,7 +29,5 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
         Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new();
-        void SetCurrentPage(Page page);
-        Task DbSil<T>() where T : IEntity, new();
     }
 }
