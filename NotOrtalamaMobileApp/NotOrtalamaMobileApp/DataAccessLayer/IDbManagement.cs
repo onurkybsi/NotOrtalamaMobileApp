@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer
 {
@@ -28,7 +29,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
         Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new();
-        void ExecuteAfterManipulation();
+        void SetCurrentPage(Page page);
         Task DbSil<T>() where T : IEntity, new();
     }
 }

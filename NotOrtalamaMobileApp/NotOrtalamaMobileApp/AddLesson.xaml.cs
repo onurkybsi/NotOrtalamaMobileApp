@@ -23,6 +23,7 @@ namespace NotOrtalamaMobileApp
             };
 
             _donemId = donemId;
+            App.dbManagement.SetCurrentPage(this);
         }
 
         protected async override void OnAppearing()

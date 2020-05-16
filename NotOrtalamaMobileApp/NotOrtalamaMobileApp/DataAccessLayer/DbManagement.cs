@@ -3,7 +3,6 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,14 +11,14 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
     public class DbManagement : IDbManagement
     {
         private static DbManagement _dbManagement;
-
         private SQLiteAsyncConnection database;
 
-        public delegate void DelegateOfManipulation();
+        private Page CurrentPage { get; set; }
+        public delegate void DelegateOfManipulation(Processes processes);
         public event DelegateOfManipulation EventOfManipulation;
 
-        private DbManagement() 
-        { 
+        private DbManagement()
+        {
             database = DependencyService.Get<ISQLiteDb>().GetConnection();
             EventOfManipulation += ExecuteAfterManipulation;
         }
@@ -64,15 +63,15 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
             filterExpressions = filterExpressions.Remove(filterExpressions.Length - 4, 4);
 
-            if(process == Processes.Delete)
-                EventOfManipulation();
-            
+            //if (process == Processes.Delete)
+            //    EventOfManipulation();
+
             return await database.QueryAsync<T>(filterExpressions, args);
         }
         async public Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new() => await database.Table<T>().ToListAsync();
         async public Task<IEntity> GetEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntity, new()
         {
-            
+
             try
             {
                 return await database.GetAsync<T>(predicate);
@@ -81,17 +80,28 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         }
         async public Task InsertEntity<T>(IEntity entity) where T : IEntity, new()
         {
-            EventOfManipulation();
             await database.InsertAsync(entity);
+            EventOfManipulation(Processes.Insert);
         }
         async public Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new()
         {
-            EventOfManipulation();
             await database.ExecuteScalarAsync<int>("DELETE FROM " + tableName + " WHERE _id = ?", Id);
+            EventOfManipulation(Processes.Delete);
         }
-        public void ExecuteAfterManipulation()
+        private async void ExecuteAfterManipulation(Processes processes)
         {
-            
+            if(processes == Processes.Insert)
+            {
+                await CurrentPage.DisplayAlert("Automatic information display test", "Insert", "OK");
+            }
+            else if(processes == Processes.Delete)
+            {
+                await CurrentPage.DisplayAlert("Automatic information display test", "Insert", "OK");
+            }
+        }
+        public void SetCurrentPage(Page page)
+        {
+            CurrentPage = page;
         }
         async public Task DbSil<T>() where T : IEntity, new() => await database.DropTableAsync<T>();
     }

@@ -7,6 +7,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
     public enum Processes
     {
         Get,
-        Delete
+        Delete,
+        Insert
     }
 }
