@@ -1,4 +1,6 @@
-﻿using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.DataAccessLayer.Logger;
+using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -96,14 +98,24 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         }
         private async void ExecuteAfterManipulation(Processes processes)
         {
-            if(processes == Processes.Insert)
+            //if(processes == Processes.Insert)
+            //{
+            //    await CurrentPage.DisplayAlert("Automatic information display test", "Insert", "OK");
+            //}
+            //else if(processes == Processes.Delete)
+            //{
+            //    await CurrentPage.DisplayAlert("Automatic information display test", "Delete", "OK");
+            //}
+
+            ILogger logger = new UILogger(CurrentPage);
+            IProcess process = new InsertProcess
             {
-                await CurrentPage.DisplayAlert("Automatic information display test", "Insert", "OK");
-            }
-            else if(processes == Processes.Delete)
-            {
-                await CurrentPage.DisplayAlert("Automatic information display test", "Delete", "OK");
-            }
+                Entity = null,
+                EntityId = 0,
+                TableName = "DersTable"
+            };
+
+            logger.Log(process);
         }
         private static void SetCurrentPage(object sender, Page e) => CurrentPage = e;
     }
