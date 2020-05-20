@@ -1,5 +1,6 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer.Logger;
 using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Dependency;
 using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
@@ -14,6 +15,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
     {
         private static DbManagement _dbManagement;
         private SQLiteAsyncConnection database;
+        private ILogger logger;
 
         private static Page CurrentPage { get; set; }
 
@@ -22,11 +24,14 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
         private DbManagement()
         {
+            DIContainer.Initialize();
+            logger = DIContainer.LoggerService;
             database = DependencyService.Get<ISQLiteDb>().GetConnection();
             EventOfManipulation += ExecuteAfterManipulation;
         }
         public static DbManagement CreateAsSingleton(Application app)
         {
+           
             app.PageAppearing += SetCurrentPage;
             return _dbManagement ?? (_dbManagement = new DbManagement());
         }
@@ -112,8 +117,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
             EventOfManipulation(process);
         }
         private async void ExecuteAfterManipulation(IProcess process)
-        {   
-            ILogger logger = new UILogger(CurrentPage);
+        {
 
             await logger.Log(process).Invoke();
         }

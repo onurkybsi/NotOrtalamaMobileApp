@@ -1,6 +1,5 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer;
 using NotOrtalamaMobileApp.Tables;
-using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -12,6 +11,7 @@ namespace NotOrtalamaMobileApp
 
         public App()
         {
+
             dbManagement = DbManagement.CreateAsSingleton(this);
 
             InitializeComponent();

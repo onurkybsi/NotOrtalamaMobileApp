@@ -82,7 +82,7 @@ namespace NotOrtalamaMobileApp
                             DonemId = _donemId,
                             Kredi = updatedCourse.Kredi,
                             HarfNotu = letterGrade.SelectedItem.ToString()
-                        });
+                        }, "DersTable");
 
                         await DisplayAlert("Tekrar ders kaydı", "Ders eklendi !", "OK");
                         await Navigation.PopAsync();
@@ -111,7 +111,7 @@ namespace NotOrtalamaMobileApp
                                 DonemId = sameCourses.DonemId,
                                 Kredi = Convert.ToInt32(courseCredit.Text),
                                 HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
-                            });
+                            }, "DersTable");
                         }
 
                         await DisplayAlert("Güncelleme", "Ders güncellendi !", "OK");
@@ -133,9 +133,9 @@ namespace NotOrtalamaMobileApp
                         DonemId = _donemId,
                         Kredi = Convert.ToInt32(courseCredit.Text),
                         HarfNotu = letterGrade.SelectedItem.ToString()
-                    });
+                    }, "DersTable");
 
-                    await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
+                    //await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
                     await Navigation.PopAsync();
                 }
                 else
