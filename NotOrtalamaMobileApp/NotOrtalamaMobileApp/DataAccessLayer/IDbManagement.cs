@@ -27,7 +27,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         /// <returns>Task<List<T>></returns>
         Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes process) where T : IEntity, new();
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
-        Task InsertEntity<T>(IEntity entity) where T : IEntity, new();
-        Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new();
+        Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new();
+        Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new();
     }
 }

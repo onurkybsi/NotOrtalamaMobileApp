@@ -17,7 +17,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
         private static Page CurrentPage { get; set; }
 
-        public delegate void DelegateOfManipulation(Processes processes);
+        public delegate void DelegateOfManipulation(IProcess processes);
         public event DelegateOfManipulation EventOfManipulation;
 
         private DbManagement()
@@ -86,36 +86,36 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
             }
             catch { return null; }
         }
-        async public Task InsertEntity<T>(IEntity entity) where T : IEntity, new()
+        async public Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new()
         {
-            await database.InsertAsync(entity);
-            EventOfManipulation(Processes.Insert);
-        }
-        async public Task DeleteEntity<T>(int Id, string tableName) where T : IEntity, new()
-        {
-            await database.ExecuteScalarAsync<int>("DELETE FROM " + tableName + " WHERE _id = ?", Id);
-            EventOfManipulation(Processes.Delete);
-        }
-        private async void ExecuteAfterManipulation(Processes processes)
-        {
-            //if(processes == Processes.Insert)
-            //{
-            //    await CurrentPage.DisplayAlert("Automatic information display test", "Insert", "OK");
-            //}
-            //else if(processes == Processes.Delete)
-            //{
-            //    await CurrentPage.DisplayAlert("Automatic information display test", "Delete", "OK");
-            //}
 
-            ILogger logger = new UILogger(CurrentPage);
+            IProcess process = new InsertProcess
+            {
+                Entity = entity,
+                EntityId = entity.Id,
+                TableName = tableName
+            };
+
+            await database.InsertAsync(entity);
+            EventOfManipulation(process);
+        }
+        async public Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new()
+        {
             IProcess process = new InsertProcess
             {
                 Entity = null,
-                EntityId = 0,
-                TableName = "DersTable"
+                EntityId = id,
+                TableName = tableName
             };
 
-            logger.Log(process);
+            await database.ExecuteScalarAsync<int>("DELETE FROM " + tableName + " WHERE _id = ?", id);
+            EventOfManipulation(process);
+        }
+        private async void ExecuteAfterManipulation(IProcess process)
+        {   
+            ILogger logger = new UILogger(CurrentPage);
+
+            await logger.Log(process).Invoke();
         }
         private static void SetCurrentPage(object sender, Page e) => CurrentPage = e;
     }

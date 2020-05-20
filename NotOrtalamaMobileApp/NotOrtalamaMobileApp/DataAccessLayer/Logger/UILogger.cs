@@ -1,5 +1,6 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
@@ -13,15 +14,30 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
             _currentPage = currentPage;
         }
 
-        public Action<IProcess> Log(IProcess process)
+        public Func<Task> Log(IProcess process)
         {
+            Func<Task> actionToBeInvoked = null;
 
             if (process.ProcessType == typeof(InsertProcess))
             {
-                return (newProcess) => _currentPage.DisplayAlert("Insert Log", "Entity inserted", "OK");
+                actionToBeInvoked = async () =>
+                {
+                    await InsertLog(process);
+                };
             }
-            else
-                return null;
+            else if (process.ProcessType == typeof(DeleteProcess))
+            {
+                actionToBeInvoked = async () =>
+                {
+                    await DeleteLog(process);
+                };
+            }
+
+            return actionToBeInvoked;
         }
+
+        private async Task InsertLog(IProcess process) => await _currentPage.DisplayAlert("Insert Log", string.Format("Entity id {0} inserted", process.Entity.Id), "OK");
+
+        private async Task DeleteLog(IProcess process) => await _currentPage.DisplayAlert("Delete Log", string.Format("Entity id {0} deleted", process.Entity.Id), "OK");
     }
 }

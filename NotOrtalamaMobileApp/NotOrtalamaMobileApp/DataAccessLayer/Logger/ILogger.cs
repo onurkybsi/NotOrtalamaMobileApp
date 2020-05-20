@@ -1,10 +1,11 @@
 ﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
 using System;
+using System.Threading.Tasks;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
 {
     public interface ILogger
     {
-        Action<IProcess> Log(IProcess process);
+        Func<Task> Log(IProcess processToBeInvoked);
     }
 }
