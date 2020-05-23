@@ -1,7 +1,4 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer.Logger;
-using NotOrtalamaMobileApp.DataAccessLayer.Process;
-using NotOrtalamaMobileApp.Dependency;
-using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -15,24 +12,17 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
     {
         private static DbManagement _dbManagement;
         private SQLiteAsyncConnection database;
-        private ILogger logger;
 
-        private static Page CurrentPage { get; set; }
-
-        public delegate void DelegateOfManipulation(IProcess processes);
+        public delegate Task DelegateOfManipulation(Func<Task> callBack);
         public event DelegateOfManipulation EventOfManipulation;
 
         private DbManagement()
         {
-            DIContainer.Initialize();
-            logger = DIContainer.LoggerService;
             database = DependencyService.Get<ISQLiteDb>().GetConnection();
-            EventOfManipulation += ExecuteAfterManipulation;
+            EventOfManipulation += ExecuteAfterProcess;
         }
-        public static DbManagement CreateAsSingleton(Application app)
+        public static DbManagement CreateAsSingleton()
         {
-           
-            app.PageAppearing += SetCurrentPage;
             return _dbManagement ?? (_dbManagement = new DbManagement());
         }
 
@@ -91,36 +81,20 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
             }
             catch { return null; }
         }
-        async public Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new()
+        async public Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new() => await database.InsertAsync(entity);
+        async public Task InsertEntity<T>(IEntity entity, string tableName, Func<Task> callBack) where T : IEntity, new()
         {
-
-            IProcess process = new InsertProcess
-            {
-                Entity = entity,
-                EntityId = entity.Id,
-                TableName = tableName
-            };
 
             await database.InsertAsync(entity);
-            EventOfManipulation(process);
+            await EventOfManipulation(callBack);
         }
-        async public Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new()
+        async public Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new() => await database.ExecuteScalarAsync<int>("DELETE FROM " + tableName + " WHERE _id = ?", id);
+        async public Task DeleteEntity<T>(int id, string tableName, Func<Task> callBack) where T : IEntity, new()
         {
-            IProcess process = new InsertProcess
-            {
-                Entity = null,
-                EntityId = id,
-                TableName = tableName
-            };
 
             await database.ExecuteScalarAsync<int>("DELETE FROM " + tableName + " WHERE _id = ?", id);
-            EventOfManipulation(process);
+            await EventOfManipulation(callBack);
         }
-        private async void ExecuteAfterManipulation(IProcess process)
-        {
-
-            await logger.Log(process).Invoke();
-        }
-        private static void SetCurrentPage(object sender, Page e) => CurrentPage = e;
+        async private Task ExecuteAfterProcess(Func<Task> callBack) => await callBack.Invoke();
     }
 }

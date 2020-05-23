@@ -1,4 +1,5 @@
-﻿using NotOrtalamaMobileApp.Infrastructure;
+﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Infrastructure;
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,13 @@ namespace NotOrtalamaMobileApp
                 {
                     int toBeDeleted = (lessonToBeDeleted.SelectedItem as Ders).Id;
 
-                    await App.dbManagement.DeleteEntity<Ders>(toBeDeleted, "DersTable");
+                    var callBack = App.logger.Log(new DeleteProcess
+                    {
+                        EntityId = toBeDeleted,
+                        TableName = "DersTable"
+                    });
+
+                    await App.dbManagement.DeleteEntity<Ders>(toBeDeleted, "DersTable", callBack);
 
                     lessonToBeDeleted.ItemsSource = await GetCoursesOfSelectedSemester(semesters.SelectedIndex);
                 }

@@ -1,10 +1,10 @@
-﻿using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer
 {
@@ -28,6 +28,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes process) where T : IEntity, new();
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new();
+        Task InsertEntity<T>(IEntity entity, string tableName, Func<Task> callBack) where T : IEntity, new();
         Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new();
+        Task DeleteEntity<T>(int id, string tableName, Func<Task> callBack) where T : IEntity, new();
     }
 }

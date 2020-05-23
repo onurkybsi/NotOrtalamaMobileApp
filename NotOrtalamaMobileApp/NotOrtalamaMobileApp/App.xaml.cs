@@ -1,4 +1,7 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer;
+﻿using Autofac;
+using NotOrtalamaMobileApp.DataAccessLayer;
+using NotOrtalamaMobileApp.DataAccessLayer.Logger;
+using NotOrtalamaMobileApp.Dependency;
 using NotOrtalamaMobileApp.Tables;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -8,11 +11,14 @@ namespace NotOrtalamaMobileApp
     public partial class App : Application
     {
         public static IDbManagement dbManagement;
+        public static ILogger logger;
 
         public App()
         {
+            dbManagement = DbManagement.CreateAsSingleton();
 
-            dbManagement = DbManagement.CreateAsSingleton(this);
+            DIContainer.Initialize(this);
+            logger = DIContainer.LoggerService;
 
             InitializeComponent();
 

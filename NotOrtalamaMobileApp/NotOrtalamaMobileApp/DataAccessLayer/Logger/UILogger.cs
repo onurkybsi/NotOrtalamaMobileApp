@@ -7,12 +7,14 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
 {
     public class UILogger : ILogger
     {
-        private Page _currentPage;
+        private static Page CurrentPage { get; set; }
 
-        public UILogger(Page currentPage)
+        public UILogger(Application app)
         {
-            _currentPage = currentPage;
+            app.PageAppearing += SetCurrentPage;
         }
+
+        private static void SetCurrentPage(object sender, Page e) => CurrentPage = e;
 
         public Func<Task> Log(IProcess process)
         {
@@ -36,8 +38,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
             return actionToBeInvoked;
         }
 
-        private async Task InsertLog(IProcess process) => await _currentPage.DisplayAlert("Insert Log", string.Format("Entity id {0} inserted", process.Entity.Id), "OK");
+        private async Task InsertLog(IProcess process) => await CurrentPage.DisplayAlert("Insert Log", string.Format("Entity id {0} inserted", process.Entity.Id), "OK");
 
-        private async Task DeleteLog(IProcess process) => await _currentPage.DisplayAlert("Delete Log", string.Format("Entity id {0} deleted", process.Entity.Id), "OK");
+        private async Task DeleteLog(IProcess process) => await CurrentPage.DisplayAlert("Delete Log", string.Format("Entity id {0} deleted", process.EntityId), "OK");
     }
 }

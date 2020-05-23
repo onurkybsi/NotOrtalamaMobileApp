@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer.Process
 {
-    public class DeleteProcess
+    public class DeleteProcess : IProcess
     {
         public string TableName { get; set; }
         public int EntityId { get; set; }

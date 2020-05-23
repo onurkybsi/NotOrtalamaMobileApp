@@ -1,4 +1,5 @@
-﻿using NotOrtalamaMobileApp.Infrastructure;
+﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Infrastructure;
 using NotOrtalamaMobileApp.Tables;
 using System;
 using System.Collections.Generic;
@@ -127,13 +128,22 @@ namespace NotOrtalamaMobileApp
 
                 if (await Validations.CheckUIDersInputForInsert(courseNameToBeAdded.Text.Trim(), _donemId, courseCredit.Text, letterGrade))
                 {
-                    await App.dbManagement.InsertEntity<Ders>(new Ders
+                    Ders toBeInserted = new Ders
                     {
                         DersAdi = courseNameToBeAdded.Text.Trim(),
                         DonemId = _donemId,
                         Kredi = Convert.ToInt32(courseCredit.Text),
                         HarfNotu = letterGrade.SelectedItem.ToString()
-                    }, "DersTable");
+                    };
+
+                    var callBack = App.logger.Log(new InsertProcess
+                    {
+                        Entity = toBeInserted,
+                        EntityId = toBeInserted.DonemId,
+                        TableName = "DersTable"
+                    });
+
+                    await App.dbManagement.InsertEntity<Ders>(toBeInserted, "DersTable", callBack);
 
                     //await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
                     await Navigation.PopAsync();
