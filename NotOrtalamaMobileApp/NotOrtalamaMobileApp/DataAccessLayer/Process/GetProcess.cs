@@ -3,11 +3,11 @@ using System;
 
 namespace NotOrtalamaMobileApp.DataAccessLayer.Process
 {
-    public class DeleteProcess : IProcessThatEntitiesCanBeSpecified
+    public class GetProcess : IProcessThatEntitiesCanBeSpecified
     {
         public string TableName { get; set; }
         public int EntityId { get; set; }
         public IEntity Entity { get; set; }
-        public Type ProcessType => typeof(DeleteProcess);
+        public Type ProcessType => typeof(GetProcess);
     }
 }

@@ -34,7 +34,7 @@ namespace NotOrtalamaMobileApp
                 filters.Add(new KeyValuePair <string, object>("DonemId", i));
             }
 
-            courseToBeUpdated.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", filters, DataAccessLayer.Processes.Get);
+            courseToBeUpdated.ItemsSource = await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", filters, new GetProcess());
         }
 
         // Select course to be update
@@ -102,7 +102,7 @@ namespace NotOrtalamaMobileApp
                         foreach (Ders sameCourses in await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
                         {
                            new KeyValuePair<string, object>("DersAdi", updatedCourse.DersAdi)
-                        }, DataAccessLayer.Processes.Get))
+                        }, new GetProcess()))
                         {
                             await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 

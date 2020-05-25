@@ -1,4 +1,5 @@
-﻿using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,14 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         }
 
         async public Task<CreateTableResult> CreateTable<T>() where T : IEntity, new() => await database.CreateTableAsync<T>();
-        async public Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Processes process) where T : IEntity, new()
+        async public Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process, Func<Task> callBack) where T : IEntity, new()
         {
 
-            string filterExpressions = process == Processes.Get
-                ? "SELECT * FROM " + tableName + " WHERE"
-                : "DELETE FROM " + tableName + " WHERE";
+            var processType = process.ProcessType == typeof(DeleteProcess);
+
+            string filterExpressions = processType
+                ? "DELETE FROM " + tableName + " WHERE"
+                : "SELECT * FROM " + tableName + " WHERE";
 
             object[] args = new object[filter.Count];
             int i = 0;
@@ -66,10 +69,16 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
 
             filterExpressions = filterExpressions.Remove(filterExpressions.Length - 4, 4);
 
-            //if (process == Processes.Delete)
-            //    EventOfManipulation();
+            var processedSpecifiedEntities = await database.QueryAsync<T>(filterExpressions, args);
 
-            return await database.QueryAsync<T>(filterExpressions, args);
+            if (callBack != null && processType)
+                await EventOfManipulation(callBack);
+
+            return processedSpecifiedEntities;
+        }
+        async public Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process) where T : IEntity, new()
+        {
+            return await ProcessSpecifiedEntities<T>(tableName, filter, process, null);
         }
         async public Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new() => await database.Table<T>().ToListAsync();
         async public Task<IEntity> GetEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntity, new()

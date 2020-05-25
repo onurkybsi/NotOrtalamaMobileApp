@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using NotOrtalamaMobileApp.DataAccessLayer;
 using NotOrtalamaMobileApp.DataAccessLayer.Logger;
+using NotOrtalamaMobileApp.DataAccessLayer.Process;
 using NotOrtalamaMobileApp.Dependency;
 using NotOrtalamaMobileApp.Dependency.Modules;
 using NotOrtalamaMobileApp.Tables;
@@ -44,7 +45,7 @@ namespace NotOrtalamaMobileApp
             await dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("DonemId", 0)
-            }, Processes.Delete);
+            }, new DeleteProcess());
         }
     }
 }

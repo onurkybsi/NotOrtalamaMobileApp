@@ -1,4 +1,5 @@
-﻿using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.Tables;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace NotOrtalamaMobileApp
             await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("DonemId", clientid)
-            }, DataAccessLayer.Processes.Delete);
+            }, new DeleteProcess());
 
             listView.ItemsSource = await Semesters();
 

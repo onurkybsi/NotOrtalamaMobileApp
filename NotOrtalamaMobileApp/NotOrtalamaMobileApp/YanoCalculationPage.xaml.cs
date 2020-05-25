@@ -90,7 +90,7 @@ namespace NotOrtalamaMobileApp
             return await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("DonemId", donemId)
-            }, DataAccessLayer.Processes.Get);
+            }, new GetProcess());
         }
     }
 }
