@@ -2,7 +2,6 @@
 using NotOrtalamaMobileApp.DataAccessLayer;
 using NotOrtalamaMobileApp.DataAccessLayer.Logger;
 using NotOrtalamaMobileApp.DataAccessLayer.Process;
-using NotOrtalamaMobileApp.Dependency;
 using NotOrtalamaMobileApp.Dependency.Modules;
 using NotOrtalamaMobileApp.Tables;
 using System.Collections.Generic;
@@ -45,7 +44,7 @@ namespace NotOrtalamaMobileApp
             }, new DeleteProcess());
         }
 
-        private IContainer BuildContainer()
+        private static IContainer BuildContainer()
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule(new UILoggerModule(this));
