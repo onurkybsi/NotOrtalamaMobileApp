@@ -18,10 +18,7 @@ namespace NotOrtalamaMobileApp
 
         public App()
         {
-
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new UILoggerModule(this));
-            diContainer = containerBuilder.Build();
+            diContainer = BuildContainer();
 
             dbManagement = DbManagement.CreateAsSingleton();
             logger = diContainer.Resolve<ILogger>();
@@ -46,6 +43,14 @@ namespace NotOrtalamaMobileApp
             {
                 new KeyValuePair<string, object>("DonemId", 0)
             }, new DeleteProcess());
+        }
+
+        private IContainer BuildContainer()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule(new UILoggerModule(this));
+            
+            return containerBuilder.Build();
         }
     }
 }
