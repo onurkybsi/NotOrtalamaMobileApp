@@ -77,13 +77,15 @@ namespace NotOrtalamaMobileApp
                 {
                     if (await Validations.CheckUIDersInputForInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
                     {
-                        await App.dbManagement.InsertEntity<Ders>(new Ders
+                        Ders ders = new Ders
                         {
                             DersAdi = updatedCourse.DersAdi.Trim(),
                             DonemId = _donemId,
                             Kredi = updatedCourse.Kredi,
                             HarfNotu = letterGrade.SelectedItem.ToString()
-                        }, "DersTable");
+                        };
+
+                        await App.dbManagement.InsertEntity<Ders>(ders, "DersTable");
 
                         await DisplayAlert("Tekrar ders kaydı", "Ders eklendi !", "OK");
                         await Navigation.PopAsync();
@@ -98,7 +100,6 @@ namespace NotOrtalamaMobileApp
                 {
                     if (Validations.CheckUIDersInputForUpdate(courseCredit.Text, letterGrade))
                     {
-                        // Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>(updatedCourse.DersAdi, "DersTable")
                         foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
                         {
                            new KeyValuePair<string, object>("DersAdi", updatedCourse.DersAdi)
@@ -106,13 +107,15 @@ namespace NotOrtalamaMobileApp
                         {
                             await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 
-                            await App.dbManagement.InsertEntity<Ders>(new Ders
+                            Ders ders = new Ders
                             {
                                 DersAdi = sameCourses.DersAdi,
                                 DonemId = sameCourses.DonemId,
                                 Kredi = Convert.ToInt32(courseCredit.Text),
                                 HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
-                            }, "DersTable");
+                            };
+
+                            await App.dbManagement.InsertEntity<Ders>(ders, "DersTable");
                         }
 
                         await DisplayAlert("Güncelleme", "Ders güncellendi !", "OK");
@@ -139,13 +142,12 @@ namespace NotOrtalamaMobileApp
                     var callBack = App.logger.Log(new InsertProcess
                     {
                         Entity = toBeInserted,
-                        EntityId = toBeInserted.DonemId,
+                        EntityId = toBeInserted.Id,
                         TableName = "DersTable"
                     });
 
                     await App.dbManagement.InsertEntity<Ders>(toBeInserted, "DersTable", callBack);
 
-                    //await DisplayAlert("Yeni ders kaydı", "Ders eklendi !", "OK");
                     await Navigation.PopAsync();
                 }
                 else

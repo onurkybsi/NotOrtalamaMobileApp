@@ -38,8 +38,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
             return actionToBeInvoked;
         }
 
-        private async Task InsertLog(IProcess process) => await CurrentPage.DisplayAlert("Insert Log", string.Format("Entity id {0} inserted", process.Entity.Id), "OK");
+        private async Task InsertLog(IProcess process) => await CurrentPage.DisplayAlert("Yeni kayıt", string.Format("Entity id {0} inserted", process.Entity.Id), "OK");
 
-        private async Task DeleteLog(IProcess process) => await CurrentPage.DisplayAlert("Delete Log", string.Format("Entity id {0} deleted", process.EntityId), "OK");
+        private async Task DeleteLog(IProcess process) => await CurrentPage.DisplayAlert("Kayıt silme", string.Format("Entity id {0} deleted", process.EntityId), "OK");
     }
 }

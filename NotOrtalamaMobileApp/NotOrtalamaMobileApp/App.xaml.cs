@@ -1,7 +1,6 @@
 ﻿using Autofac;
-using NotOrtalamaMobileApp.DataAccessLayer;
 using NotOrtalamaMobileApp.DataAccessLayer.Logger;
-using NotOrtalamaMobileApp.DataAccessLayer.Process;
+using NotOrtalamaMobileApp.DataAccessLayer.Management;
 using NotOrtalamaMobileApp.Dependency.Modules;
 using NotOrtalamaMobileApp.Tables;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace NotOrtalamaMobileApp.DataAccessLayer
+namespace NotOrtalamaMobileApp.DataAccessLayer.Management
 {
     public interface IDbManagement
     {
