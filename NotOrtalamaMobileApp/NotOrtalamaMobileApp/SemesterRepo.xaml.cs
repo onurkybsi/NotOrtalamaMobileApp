@@ -45,10 +45,10 @@ namespace NotOrtalamaMobileApp
             var semester = ((MenuItem)sender).CommandParameter;
             int clientid = (int)(semester.GetType()).GetProperty("SemesterId").GetValue(semester);
 
-            await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+            await App.dbManagement.DeleteSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("DonemId", clientid)
-            }, new DeleteProcess());
+            });
 
             listView.ItemsSource = await Semesters();
 

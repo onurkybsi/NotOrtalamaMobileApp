@@ -13,24 +13,36 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         Task<CreateTableResult> CreateTable<T>() where T : IEntity, new();
         Task<IEntity> GetEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntity, new();
         /// <summary>
-        ///     Performs getting or deleting entities that the given conditions.
+        ///     Performs deleting entities that the given conditions.
         /// </summary>
         /// <param name="tableName">
         ///     The name of the table containing the entities to be processed.
         /// </param>
         /// <param name="filter">
         ///     Property name and value for the required conditions.
-        /// </param>
-        /// <param name="processes">
-        ///    The instance of process that describe database process.Can be get or delete.
         /// </param>
         /// <param name="callBack">
-        ///     Process to invoke after the database process is over
+        ///     Process to invoke after the getting process is over
         /// </param>
         /// <returns>Task<List<T>></returns>
-        Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process, Func<Task> callBack) where T : IEntity, new();
+        Task<List<T>> GetSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Func<Task> callBack) where T : IEntity, new();
         /// <summary>
-        ///     Performs getting or deleting entities that the given conditions.
+        ///     Performs deleting entities that the given conditions.
+        /// </summary>
+        /// <param name="tableName">
+        ///     The name of the table containing the entities to be processed.
+        /// </param>
+        /// <param name="filter">
+        ///     Property name and value for the required conditions.
+        /// <returns>Task<List<T>></returns>
+        Task<List<T>> GetSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter) where T : IEntity, new();
+        Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
+        Task InsertEntity<T>(IEntity entity, string tableName, Func<Task> callBack) where T : IEntity, new();
+        Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new();
+        Task DeleteEntity<T>(int id, string tableName, Func<Task> callBack) where T : IEntity, new();
+        Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new();
+        /// <summary>
+        ///     Performs deleting entities that the given conditions.
         /// </summary>
         /// <param name="tableName">
         ///     The name of the table containing the entities to be processed.
@@ -38,15 +50,21 @@ namespace NotOrtalamaMobileApp.DataAccessLayer
         /// <param name="filter">
         ///     Property name and value for the required conditions.
         /// </param>
-        /// <param name="processes">
-        ///    The instance of process that describe database process.Can be get or delete.
+        /// <param name="callBack">
+        ///     Process to invoke after the deleting process is over
         /// </param>
         /// <returns>Task<List<T>></returns>
-        Task<List<T>> ProcessSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process) where T : IEntity, new();
-        Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
-        Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new();
-        Task InsertEntity<T>(IEntity entity, string tableName, Func<Task> callBack) where T : IEntity, new();
-        Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new();
-        Task DeleteEntity<T>(int id, string tableName, Func<Task> callBack) where T : IEntity, new();
+        Task<List<T>> DeleteSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Func<Task> callBack) where T : IEntity, new();
+        /// <summary>
+        ///     Performs deleting entities that the given conditions.
+        /// </summary>
+        /// <param name="tableName">
+        ///     The name of the table containing the entities to be processed.
+        /// </param>
+        /// <param name="filter">
+        ///     Property name and value for the required conditions.
+        /// </param>
+        /// <returns>Task<List<T>></returns>
+        Task<List<T>> DeleteSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter) where T : IEntity, new();
     }
 }

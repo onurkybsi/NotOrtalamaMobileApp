@@ -87,10 +87,10 @@ namespace NotOrtalamaMobileApp
 
         private static async Task<List<Ders>> GetCoursesOfSelectedSemester(int donemId)
         {
-            return await App.dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+            return await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("DonemId", donemId)
-            }, new GetProcess());
+            });
         }
     }
 }

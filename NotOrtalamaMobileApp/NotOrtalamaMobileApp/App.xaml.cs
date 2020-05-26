@@ -38,13 +38,13 @@ namespace NotOrtalamaMobileApp
 
         protected async override void OnSleep()
         {
-            await dbManagement.ProcessSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
+            await dbManagement.DeleteSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("DonemId", 0)
-            }, new DeleteProcess());
+            });
         }
 
-        private static IContainer BuildContainer()
+        private IContainer BuildContainer()
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule(new UILoggerModule(this));
