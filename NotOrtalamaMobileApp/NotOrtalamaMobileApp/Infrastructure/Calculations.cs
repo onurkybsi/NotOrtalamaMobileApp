@@ -32,7 +32,7 @@ namespace NotOrtalamaMobileApp.Infrastructure
                 {
                     IsThatLastOne = true;
 
-                    if (ders1.DersAdi == ders2.DersAdi && ders1.DonemId < ders2.DonemId)
+                    if (ders1.DecisiveName == ders2.DecisiveName && ders1.DonemId < ders2.DonemId)
                     {
                         IsThatLastOne = false;
                         break;

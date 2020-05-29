@@ -35,7 +35,7 @@ namespace NotOrtalamaMobileApp.Infrastructure
             }
             catch { return false; }
 
-            if (await App.dbManagement.GetEntity<Ders>(x => x.DersAdi == dersAdi && x.DonemId == donemId) != null)
+            if (await App.dbManagement.GetEntity<Ders>(x => x.DecisiveName == dersAdi && x.DonemId == donemId) != null)
                 return false;
 
             return true;

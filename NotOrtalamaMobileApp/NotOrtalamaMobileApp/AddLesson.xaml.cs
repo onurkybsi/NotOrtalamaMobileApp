@@ -75,11 +75,11 @@ namespace NotOrtalamaMobileApp
                 // Ayni dersi 2. kez almis
                 if (_donemId != updatedCourse.DonemId)
                 {
-                    if (await Validations.CheckUIDersInputForInsert(updatedCourse.DersAdi, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
+                    if (await Validations.CheckUIDersInputForInsert(updatedCourse.DecisiveName, _donemId, updatedCourse.Kredi.ToString(), letterGrade))
                     {
                         Ders ders = new Ders
                         {
-                            DersAdi = updatedCourse.DersAdi.Trim(),
+                            DecisiveName = updatedCourse.DecisiveName.Trim(),
                             DonemId = _donemId,
                             Kredi = updatedCourse.Kredi,
                             HarfNotu = letterGrade.SelectedItem.ToString()
@@ -102,14 +102,14 @@ namespace NotOrtalamaMobileApp
                     {
                         foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
                         {
-                           new KeyValuePair<string, object>("DersAdi", updatedCourse.DersAdi)
+                           new KeyValuePair<string, object>("DersAdi", updatedCourse.DecisiveName)
                         }))
                         {
                             await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 
                             Ders ders = new Ders
                             {
-                                DersAdi = sameCourses.DersAdi,
+                                DecisiveName = sameCourses.DecisiveName,
                                 DonemId = sameCourses.DonemId,
                                 Kredi = Convert.ToInt32(courseCredit.Text),
                                 HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
@@ -133,7 +133,7 @@ namespace NotOrtalamaMobileApp
                 {
                     Ders toBeInserted = new Ders
                     {
-                        DersAdi = courseNameToBeAdded.Text.Trim(),
+                        DecisiveName = courseNameToBeAdded.Text.Trim(),
                         DonemId = _donemId,
                         Kredi = Convert.ToInt32(courseCredit.Text),
                         HarfNotu = letterGrade.SelectedItem.ToString()

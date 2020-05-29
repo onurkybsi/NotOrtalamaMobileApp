@@ -16,6 +16,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
 
         private static void SetCurrentPage(object sender, Page e) => CurrentPage = e;
 
+        public Func<Task> Log(string message) => async () => { await CurrentPage.DisplayAlert("Kayıt silme", message, "OK"); };
+
         public Func<Task> Log(IProcess process)
         {
             Func<Task> actionToBeInvoked = null;
@@ -38,7 +40,14 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
             return actionToBeInvoked;
         }
 
-        private async Task InsertLog(IProcess process) => await CurrentPage.DisplayAlert("Yeni kayıt", string.Format("Entity id {0} inserted", process.Entity.Id), "OK");
+        private async Task InsertLog(IProcess process)
+        {
+            string message = process.Entity != null
+                ? string.Format("{0} eklendi!", process.Entity.DecisiveName)
+                : string.Format("Id {0} eklendi!", process.Entity.Id);
+
+            await CurrentPage.DisplayAlert("Yeni Kayıt", message, "OK");
+        }
 
         private async Task DeleteLog(IProcess process) => await CurrentPage.DisplayAlert("Kayıt silme", string.Format("Entity id {0} deleted", process.EntityId), "OK");
     }

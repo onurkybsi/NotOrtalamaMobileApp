@@ -8,7 +8,8 @@ namespace NotOrtalamaMobileApp.Tables
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
-        public string DersAdi { get; set; }
+        [Column("DersAdi")]
+        public string DecisiveName { get; set; }
         public int Kredi { get; set; }
         public string HarfNotu { get; set; }
         public int DonemId { get; set; }
@@ -50,7 +51,7 @@ namespace NotOrtalamaMobileApp.Tables
         {
             get
             {
-                return this.DonemId.ToString() + ". Dönem / " + this.DersAdi;
+                return this.DonemId.ToString() + ". Dönem / " + this.DecisiveName;
             }
         }
     }

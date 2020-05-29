@@ -80,5 +80,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
 
             return result;
         }
+
+        async public Task DbSil<T>() where T : IEntity, new() => await database.DropTableAsync<T>();
     }
 }

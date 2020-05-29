@@ -5,5 +5,6 @@ namespace NotOrtalamaMobileApp.Tables
     {
         [SQLite.PrimaryKey, SQLite.AutoIncrement]
         int Id { get; }
+        string DecisiveName { get; set; }
     }
 }

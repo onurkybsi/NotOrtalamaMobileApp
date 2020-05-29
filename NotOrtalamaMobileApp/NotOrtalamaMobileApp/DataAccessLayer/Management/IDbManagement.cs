@@ -1,5 +1,4 @@
-﻿using NotOrtalamaMobileApp.DataAccessLayer.Process;
-using NotOrtalamaMobileApp.Tables;
+﻿using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -66,5 +65,6 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
         /// </param>
         /// <returns>Task<List<T>></returns>
         Task<List<T>> DeleteSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter) where T : IEntity, new();
+        Task DbSil<T>() where T : IEntity, new();
     }
 }

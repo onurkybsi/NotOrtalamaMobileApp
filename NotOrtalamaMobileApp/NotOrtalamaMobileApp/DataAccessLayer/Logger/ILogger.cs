@@ -7,5 +7,6 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
     public interface ILogger
     {
         Func<Task> Log(IProcess processToBeInvoked);
+        Func<Task> Log(string message);
     }
 }
