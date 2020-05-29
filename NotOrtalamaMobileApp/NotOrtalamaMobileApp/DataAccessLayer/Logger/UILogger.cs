@@ -49,6 +49,6 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
             await CurrentPage.DisplayAlert("Yeni Kayıt", message, "OK");
         }
 
-        private async Task DeleteLog(IProcess process) => await CurrentPage.DisplayAlert("Kayıt silme", string.Format("Entity id {0} deleted", process.EntityId), "OK");
+        private async Task DeleteLog(IProcess process) => await CurrentPage.DisplayAlert("Kayıt silme", string.Format("Id {0} silindi!", process.EntityId), "OK");
     }
 }
