@@ -44,7 +44,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Logger
         {
             string message = process.Entity != null
                 ? string.Format("{0} eklendi!", process.Entity.DecisiveName)
-                : string.Format("Id {0} eklendi!", process.Entity.Id);
+                : string.Format("Id {0} eklendi!", process.EntityId);
 
             await CurrentPage.DisplayAlert("Yeni Kayıt", message, "OK");
         }
