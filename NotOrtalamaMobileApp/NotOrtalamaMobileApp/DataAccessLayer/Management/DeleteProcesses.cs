@@ -17,7 +17,7 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
         }
         async public Task<List<T>> DeleteSpecifiedEntities<T>(string tableName, List<KeyValuePair<string, object>> filter, Func<Task> callBack) where T : IEntity, new()
         {
-            var queryParameters = BuildFilterExpression(tableName, filter, new DeleteProcess());
+            var queryParameters = BuildSQLCommandToBeExecute(tableName, filter, new DeleteProcess());
 
             string filterExpressions = (string)queryParameters[0];
             object[] args = (object[])queryParameters[1];

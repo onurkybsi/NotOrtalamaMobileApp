@@ -105,19 +105,26 @@ namespace NotOrtalamaMobileApp
                            new KeyValuePair<string, object>("DersAdi", updatedCourse.DecisiveName)
                         }))
                         {
-                            await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
+                            //await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 
-                            Ders ders = new Ders
+                            //Ders ders = new Ders
+                            //{
+                            //    DecisiveName = sameCourses.DecisiveName,
+                            //    DonemId = sameCourses.DonemId,
+                            //    Kredi = Convert.ToInt32(courseCredit.Text),
+                            //    HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
+                            //};
+
+                            string harfNotu = (sameCourses.Id != updatedCourse.Id) ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString();
+
+                            //await App.dbManagement.InsertEntity<Ders>(ders, "DersTable");
+
+                            await App.dbManagement.UpdateEntity<Ders>("DersTable", new List<KeyValuePair<string, object>>
                             {
-                                DecisiveName = sameCourses.DecisiveName,
-                                DonemId = sameCourses.DonemId,
-                                Kredi = Convert.ToInt32(courseCredit.Text),
-                                HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
-                            };
-
-                            await App.dbManagement.InsertEntity<Ders>(ders, "DersTable");
+                                new KeyValuePair<string, object>("_id", sameCourses.Id)
+                            }, x => x.Kredi == Convert.ToInt32(courseCredit.Text) && x.HarfNotu == harfNotu);
                         }
-
+                        
                         await DisplayAlert("Güncelleme", "Ders güncellendi !", "OK");
                         await Navigation.PopAsync();
                     }

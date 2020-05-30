@@ -3,6 +3,7 @@ using NotOrtalamaMobileApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -24,17 +25,34 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
         public static DbManagement CreateAsSingleton() => _dbManagement ?? (_dbManagement = new DbManagement());
         async public Task<CreateTableResult> CreateTable<T>() where T : IEntity, new() => await database.CreateTableAsync<T>();
         async private Task ExecuteAfterProcess(Func<Task> callBack) => await callBack.Invoke();
-        private static object[] BuildFilterExpression(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process)
+        private static object[] BuildSQLCommandToBeExecute(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process, Expression<Func<IEntity, bool>> updateExpressions = null)
         {
+            // Detect inconsistency on update
+            #region
+            if (process.ProcessType == typeof(UpdateProcess) && updateExpressions == null)
+            {
+                throw new InvalidOperationException(string.Format("If process type is {0}, updateExpression cannot be null", typeof(UpdateProcess).ToString()));
+            }
+            else if (process.ProcessType != typeof(UpdateProcess) && updateExpressions != null)
+            {
+                throw new InvalidOperationException(string.Format("If updateExpressions is not null, process type is can only be {0}", typeof(UpdateProcess).ToString()));
+            }
+            #endregion 
+
             var result = new object[2];
 
-            string detectProcess = DetectProcess(process);
+            string processCommand = BuildProcessCommand(process, tableName);
+            string filterExpressions = string.Format("{0} WHERE", processCommand);
 
-            string filterExpressions = string.Format("{0} FROM {1} WHERE", detectProcess, tableName);
+            if(process.ProcessType == typeof(UpdateProcess))
+            {
+
+            }
 
             object[] args = new object[filter.Count];
             int i = 0;
 
+            // WHERE conditions adding;
             foreach (var filterExpression in filter)
             {
                 if (filterExpression.Value.GetType() != typeof(int) && filterExpression.Value.GetType() != typeof(string))
@@ -69,18 +87,17 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
 
             return result;
         }
-        private static string DetectProcess(IProcessThatEntitiesCanBeSpecified process)
+        private static string BuildProcessCommand(IProcessThatEntitiesCanBeSpecified process, string tableName)
         {
-            string result = "SELECT *";
+            string result = string.Format("SELECT * FROM {0}", tableName);
 
             if (process.ProcessType == typeof(DeleteProcess))
-            {
-                result = "DELETE";
-            }
+                result = string.Format("DELETE FROM {0}", tableName);
+            else if (process.ProcessType == typeof(UpdateProcess))
+                result = string.Format("UPDATE {0} SET ", tableName);
 
             return result;
         }
-
         async public Task DbSil<T>() where T : IEntity, new() => await database.DropTableAsync<T>();
     }
 }
