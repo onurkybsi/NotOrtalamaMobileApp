@@ -29,9 +29,9 @@ namespace NotOrtalamaMobileApp
         {
             List<KeyValuePair<string, object>> filters = new List<KeyValuePair<string, object>>();
 
-            for (int i = _donemId; i > 0; i--) 
+            for (int i = _donemId; i > 0; i--)
             {
-                filters.Add(new KeyValuePair <string, object>("DonemId", i));
+                filters.Add(new KeyValuePair<string, object>("DonemId", i));
             }
 
             courseToBeUpdated.ItemsSource = await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", filters);
@@ -100,31 +100,27 @@ namespace NotOrtalamaMobileApp
                 {
                     if (Validations.CheckUIDersInputForUpdate(courseCredit.Text, letterGrade))
                     {
-                        foreach (Ders sameCourses in await App.dbManagement.GetSpecifiedEntities<Ders>("DersTable", new List<KeyValuePair<string, object>>
-                        {
-                           new KeyValuePair<string, object>("DersAdi", updatedCourse.DecisiveName)
-                        }))
-                        {
-                            //await App.dbManagement.DeleteEntity<Ders>(sameCourses.Id, "DersTable");
 
-                            //Ders ders = new Ders
-                            //{
-                            //    DecisiveName = sameCourses.DecisiveName,
-                            //    DonemId = sameCourses.DonemId,
-                            //    Kredi = Convert.ToInt32(courseCredit.Text),
-                            //    HarfNotu = sameCourses.Id != updatedCourse.Id ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString()
-                            //};
-
-                            string harfNotu = (sameCourses.Id != updatedCourse.Id) ? sameCourses.HarfNotu : letterGrade.SelectedItem.ToString();
-
-                            //await App.dbManagement.InsertEntity<Ders>(ders, "DersTable");
-
-                            await App.dbManagement.UpdateEntity<Ders>("DersTable", new List<KeyValuePair<string, object>>
+                        await App.dbManagement.UpdateEntity<Ders>("DersTable",
+                            new List<KeyValuePair<string, object>>
                             {
-                                new KeyValuePair<string, object>("_id", sameCourses.Id)
-                            }, x => x.Kredi == Convert.ToInt32(courseCredit.Text) && x.HarfNotu == harfNotu);
-                        }
-                        
+                                new KeyValuePair<string, object>("_id", updatedCourse.Id)
+                            },
+                            new List<KeyValuePair<string, object>>
+                            {
+                                new KeyValuePair<string, object>("HarfNotu", letterGrade.SelectedItem.ToString())
+                            });
+
+                        await App.dbManagement.UpdateEntity<Ders>("DersTable",
+                            new List<KeyValuePair<string, object>>
+                            {
+                                new KeyValuePair<string, object>("DersAdi", updatedCourse.DecisiveName)
+                            },
+                            new List<KeyValuePair<string, object>>
+                            {
+                                new KeyValuePair<string, object>("Kredi", Convert.ToInt32(courseCredit.Text))
+                            });
+
                         await DisplayAlert("Güncelleme", "Ders güncellendi !", "OK");
                         await Navigation.PopAsync();
                     }

@@ -38,7 +38,8 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
         Task<IEnumerable<T>> GetAllEntities<T>() where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity, string tableName, Func<Task> callBack) where T : IEntity, new();
         Task InsertEntity<T>(IEntity entity, string tableName) where T : IEntity, new();
-        Task UpdateEntity<T>(string tableName, List<KeyValuePair<string, object>> filter, Func<T, bool> updateExpressions) where T : IEntity, new();
+        Task UpdateEntity<T>(string tableName, List<KeyValuePair<string, object>> filter, List<KeyValuePair<string, object>> newValues, Func<Task> callBack) where T : IEntity, new();
+        Task UpdateEntity<T>(string tableName, List<KeyValuePair<string, object>> filter, List<KeyValuePair<string, object>> newValues) where T : IEntity, new();
         Task DeleteEntity<T>(int id, string tableName, Func<Task> callBack) where T : IEntity, new();
         Task DeleteEntity<T>(int id, string tableName) where T : IEntity, new();
         /// <summary>

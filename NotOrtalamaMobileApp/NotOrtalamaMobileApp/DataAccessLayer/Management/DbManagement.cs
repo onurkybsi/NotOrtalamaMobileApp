@@ -25,15 +25,15 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
         public static DbManagement CreateAsSingleton() => _dbManagement ?? (_dbManagement = new DbManagement());
         async public Task<CreateTableResult> CreateTable<T>() where T : IEntity, new() => await database.CreateTableAsync<T>();
         async private Task ExecuteAfterProcess(Func<Task> callBack) => await callBack.Invoke();
-        private static object[] BuildSQLCommandToBeExecute(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process, Expression<Func<IEntity, bool>> updateExpressions = null)
+        private static object[] BuildSQLCommandToBeExecute(string tableName, List<KeyValuePair<string, object>> filter, IProcessThatEntitiesCanBeSpecified process, List<KeyValuePair<string, object>> newValues = null)
         {
             // Detect inconsistency on update
             #region
-            if (process.ProcessType == typeof(UpdateProcess) && updateExpressions == null)
+            if (process.ProcessType == typeof(UpdateProcess) && newValues == null)
             {
                 throw new InvalidOperationException(string.Format("If process type is {0}, updateExpression cannot be null", typeof(UpdateProcess).ToString()));
             }
-            else if (process.ProcessType != typeof(UpdateProcess) && updateExpressions != null)
+            if (process.ProcessType != typeof(UpdateProcess) && newValues != null)
             {
                 throw new InvalidOperationException(string.Format("If updateExpressions is not null, process type is can only be {0}", typeof(UpdateProcess).ToString()));
             }
@@ -42,12 +42,18 @@ namespace NotOrtalamaMobileApp.DataAccessLayer.Management
             var result = new object[2];
 
             string processCommand = BuildProcessCommand(process, tableName);
-            string filterExpressions = string.Format("{0} WHERE", processCommand);
 
-            if(process.ProcessType == typeof(UpdateProcess))
+            if (process.ProcessType == typeof(UpdateProcess))
             {
+                foreach (var newValue in newValues)
+                {
+                    processCommand += string.Format("{0} = '{1}', ", newValue.Key, newValue.Value);
+                }
 
+                processCommand = processCommand.Remove(processCommand.Length - 2, 2);
             }
+
+            string filterExpressions = string.Format("{0} WHERE", processCommand);
 
             object[] args = new object[filter.Count];
             int i = 0;
